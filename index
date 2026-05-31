@@ -1,0 +1,2230 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elektr Energetikasi — O'quv Materiali</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #0d1117;
+    --surface:   #161b22;
+    --surface2:  #1c2330;
+    --border:    #2a3448;
+    --accent:    #2f81f7;
+    --accent2:   #3fb950;
+    --accent3:   #e3b341;
+    --danger:    #f85149;
+    --text:      #c9d1d9;
+    --text-dim:  #8b949e;
+    --heading:   #e6edf3;
+    --mono:      'IBM Plex Mono', monospace;
+    --sans:      'IBM Plex Sans', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(135deg, #0d1117 0%, #0f1f3d 50%, #0d1117 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 48px 24px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(47,129,247,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header-badge {
+    display: inline-block;
+    background: rgba(47,129,247,0.15);
+    border: 1px solid rgba(47,129,247,0.4);
+    color: var(--accent);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+  header h1 {
+    font-size: clamp(22px, 4vw, 38px);
+    font-weight: 700;
+    color: var(--heading);
+    letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  header h1 span { color: var(--accent); }
+  header p {
+    color: var(--text-dim);
+    font-size: 14px;
+    max-width: 620px;
+    margin: 0 auto;
+  }
+
+  /* ── LAYOUT ── */
+  main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+
+  /* ── ACCORDION ── */
+  details {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 14px;
+    overflow: hidden;
+    transition: border-color 0.25s;
+  }
+  details:hover { border-color: rgba(47,129,247,0.5); }
+  details[open] {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px rgba(47,129,247,0.2), 0 8px 32px rgba(0,0,0,0.4);
+  }
+
+  summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 18px 22px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    user-select: none;
+    transition: background 0.2s;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary:hover { background: rgba(47,129,247,0.06); }
+
+  .topic-num {
+    flex-shrink: 0;
+    width: 36px; height: 36px;
+    background: rgba(47,129,247,0.15);
+    border: 1px solid rgba(47,129,247,0.35);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+  }
+  .topic-title {
+    flex: 1;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--heading);
+    line-height: 1.4;
+  }
+  .arrow {
+    flex-shrink: 0;
+    width: 20px; height: 20px;
+    color: var(--text-dim);
+    transition: transform 0.3s ease;
+  }
+  details[open] .arrow { transform: rotate(90deg); color: var(--accent); }
+
+  /* ── CONTENT ── */
+  .content {
+    padding: 0 22px 26px;
+    border-top: 1px solid var(--border);
+    animation: slideDown 0.25s ease;
+  }
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTION BLOCKS ── */
+  .section {
+    margin-top: 22px;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    border-radius: 6px 6px 0 0;
+  }
+  .section-body {
+    padding: 16px;
+    background: var(--surface2);
+    border-radius: 0 0 8px 8px;
+  }
+
+  /* Colors per section type */
+  .annot  .section-header { background: rgba(47,129,247,0.18); color: #58a6ff; border-left: 3px solid var(--accent); }
+  .theory .section-header { background: rgba(63,185,80,0.15);  color: #56d364; border-left: 3px solid var(--accent2); }
+  .pract  .section-header { background: rgba(227,179,65,0.15); color: #e3b341; border-left: 3px solid var(--accent3); }
+  .fault  .section-header { background: rgba(139,148,158,0.15);color: #c9d1d9; border-left: 3px solid #8b949e; }
+  .safety .section-header { background: rgba(248,81,73,0.18);  color: #ff7b72; border-left: 3px solid var(--danger); }
+
+  /* ── TYPOGRAPHY ── */
+  h3 { font-size: 15px; font-weight: 600; color: var(--heading); margin: 14px 0 6px; }
+  h4 { font-size: 13px; font-weight: 600; color: var(--accent3); margin: 12px 0 4px; }
+  p  { margin-bottom: 10px; color: var(--text); }
+  ul, ol { padding-left: 20px; margin-bottom: 10px; }
+  li { margin-bottom: 5px; color: var(--text); }
+  li::marker { color: var(--accent); }
+  strong { color: var(--heading); font-weight: 600; }
+  em { color: var(--accent3); font-style: italic; }
+  code {
+    font-family: var(--mono);
+    background: rgba(47,129,247,0.12);
+    color: #79c0ff;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 12.5px;
+  }
+
+  /* ── TABLE ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+    font-size: 13.5px;
+  }
+  th {
+    background: rgba(47,129,247,0.2);
+    color: #79c0ff;
+    font-weight: 600;
+    padding: 8px 12px;
+    text-align: left;
+    border: 1px solid var(--border);
+  }
+  td {
+    padding: 7px 12px;
+    border: 1px solid var(--border);
+    vertical-align: top;
+    color: var(--text);
+  }
+  tr:nth-child(even) td { background: rgba(255,255,255,0.03); }
+
+  /* ── SAFETY BOX ── */
+  .safety-box {
+    background: rgba(248,81,73,0.08);
+    border: 1px solid rgba(248,81,73,0.4);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-top: 8px;
+  }
+  .safety-box p, .safety-box li { color: #ffa198; }
+  .safety-box li::marker { color: var(--danger); }
+  .safety-title {
+    font-weight: 700;
+    color: #ff7b72;
+    font-size: 13px;
+    margin-bottom: 8px;
+    display: flex; align-items: center; gap: 6px;
+  }
+
+  /* ── STEPS ── */
+  .steps { list-style: none; padding: 0; counter-reset: step; }
+  .steps li {
+    counter-increment: step;
+    display: flex; gap: 12px;
+    margin-bottom: 10px;
+    color: var(--text);
+  }
+  .steps li::before {
+    content: counter(step);
+    flex-shrink: 0;
+    width: 26px; height: 26px;
+    background: rgba(47,129,247,0.2);
+    border: 1px solid rgba(47,129,247,0.5);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-top: 2px;
+  }
+
+  /* ── INFO BOX ── */
+  .info-box {
+    background: rgba(63,185,80,0.08);
+    border-left: 3px solid var(--accent2);
+    border-radius: 0 6px 6px 0;
+    padding: 10px 14px;
+    margin: 8px 0;
+    color: #aff5b4;
+    font-size: 13.5px;
+  }
+  .warn-box {
+    background: rgba(227,179,65,0.08);
+    border-left: 3px solid var(--accent3);
+    border-radius: 0 6px 6px 0;
+    padding: 10px 14px;
+    margin: 8px 0;
+    color: #f0c070;
+    font-size: 13.5px;
+  }
+
+  /* ── FORMULA ── */
+  .formula {
+    font-family: var(--mono);
+    background: rgba(0,0,0,0.3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 16px;
+    margin: 8px 0;
+    font-size: 13px;
+    color: #79c0ff;
+    display: block;
+    overflow-x: auto;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 16px 0;
+  }
+
+  /* ── TOC ── */
+  .toc {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+  }
+  .toc h2 {
+    font-size: 13px;
+    font-family: var(--mono);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-dim);
+    margin-bottom: 14px;
+  }
+  .toc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 6px;
+  }
+  .toc-item {
+    display: flex; align-items: center; gap: 8px;
+    padding: 6px 10px;
+    border-radius: 5px;
+    font-size: 13px;
+    color: var(--text-dim);
+    transition: background 0.15s, color 0.15s;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .toc-item:hover { background: rgba(47,129,247,0.1); color: var(--accent); }
+  .toc-item span { font-family: var(--mono); font-size: 11px; color: var(--border); }
+
+  footer {
+    text-align: center;
+    padding: 24px;
+    color: var(--text-dim);
+    font-size: 12px;
+    border-top: 1px solid var(--border);
+    font-family: var(--mono);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-badge">O'quv Materiali · PTE/PTB · 2025</div>
+  <h1>Elektr <span>Energetikasi</span> va Jihozlaridan Foydalanish</h1>
+  <p>Muhandis-pedagoglar va elektr texniklari uchun ilmiy-amaliy qo'llanma — 17 mavzu, to'liq nazariy va amaliy tarkib</p>
+</header>
+
+<main>
+
+  <!-- TOC -->
+  <div class="toc">
+    <h2>// Mavzular ro'yxati</h2>
+    <div class="toc-grid">
+      <a class="toc-item" href="#t20"><span>#20</span> Elektr jihozlarini sinovdan o'tkazish</a>
+      <a class="toc-item" href="#t21"><span>#21</span> Kuch transformatorlarini ishlatish va ta'mirlash</a>
+      <a class="toc-item" href="#t22"><span>#22</span> Transformator elementlarining ishlashi</a>
+      <a class="toc-item" href="#t23"><span>#23</span> Transformatorni ishga tushirishdan oldin sinov</a>
+      <a class="toc-item" href="#t24"><span>#24</span> Harorat, izolyatsiya, quritish va moy</a>
+      <a class="toc-item" href="#t25"><span>#25</span> Elektr mashinalarini ishlatish va ta'mirlash</a>
+      <a class="toc-item" href="#t26"><span>#26</span> Elektr mashinalarni sinovdan o'tkazish</a>
+      <a class="toc-item" href="#t27"><span>#27</span> Elektr mashinani ishga tushirish va nazorat</a>
+      <a class="toc-item" href="#t28"><span>#28</span> Izolyatsiya quritish, tok yig'uvchi va podshipnik</a>
+      <a class="toc-item" href="#t29"><span>#29</span> Nosozliklar va texnik xizmat</a>
+      <a class="toc-item" href="#t30"><span>#30</span> 1000 V gacha TQ'dagi yurgizish</a>
+      <a class="toc-item" href="#t31"><span>#31</span> Yurgizish, himoya va rostlash</a>
+      <a class="toc-item" href="#t32"><span>#32</span> Apparatlarini ishlatish va ta'mirlash</a>
+      <a class="toc-item" href="#t33"><span>#33</span> TQ va apparatlarga texnik xizmat</a>
+      <a class="toc-item" href="#t34"><span>#34</span> Himoya va rostlash apparatlarini o'rganish</a>
+      <a class="toc-item" href="#t35"><span>#35</span> Himoya apparatlarini ishlatish</a>
+      <a class="toc-item" href="#t36"><span>#36</span> Himoya apparatlarini ta'mirlash</a>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ MAVZU 20 ═══ -->
+  <details id="t20">
+    <summary>
+      <div class="topic-num">20</div>
+      <div class="topic-title">Elektr jihozlarini sinovdan o'tkazish qoplami va normalari hamda PTE asosida sinovdan o'tkazish</div>
+      <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    </summary>
+    <div class="content">
+
+      <div class="section annot">
+        <div class="section-header">📌 Annotatsiya</div>
+        <div class="section-body">
+          <p>Elektr jihozlarini sinovdan o'tkazish — jihozning haqiqiy texnik holatini aniqlash, nosozliklarni erta topish va foydalanish xavfsizligini ta'minlash maqsadida amalga oshiriladigan majburiy texnik tadbirlar majmuidir. PTE (Elektr qurilmalarini texnik ishlatish qoidalari) va PTB (Xavfsizlik texnikasi qoidalari) asosida belgilangan normativlar doirasida o'tkaziladi.</p>
+          <p>Sinovlar uch turga bo'linadi: <strong>qabul qilish sinovlari</strong> (montajdan keyin), <strong>davriy sinovlar</strong> (ish jarayonida) va <strong>navbatdan tashqari sinovlar</strong> (ta'mirlashdan yoki avariyadan keyin).</p>
+        </div>
+      </div>
+
+      <div class="section theory">
+        <div class="section-header">📚 Nazariy asoslar va PTE/PTB qoidalari</div>
+        <div class="section-body">
+          <h3>Normativ-huquqiy asos</h3>
+          <ul>
+            <li><strong>PTE 5-bob</strong>: Elektr jihozlarini sinovdan o'tkazish muddatlari va hajmi</li>
+            <li><strong>PTB 1.1</strong>: Sinovchi xodimlarga qo'yiladigan talablar (guruh III yoki undan yuqori)</li>
+            <li><strong>GOST 17516.1-90</strong>: Elektr jihozlari uchun sinov standartlari</li>
+          </ul>
+
+          <h3>Sinovlarning asosiy turlari va parametrlari</h3>
+          <table>
+            <tr><th>Sinov turi</th><th>O'lchanadigan parametr</th><th>Normalativ qiymat</th><th>Davriyligi</th></tr>
+            <tr><td>Izolyatsiya qarshiligini o'lchash</td><td>R<sub>iz</sub> (MΩ)</td><td>≥ 0,5 MΩ (0,4 kV uchun)</td><td>1 yil</td></tr>
+            <tr><td>Yuqori kuchlanish sinoví</td><td>U<sub>sinov</sub> (kV)</td><td>Nom. kuchlanish × 1,5÷2,5</td><td>Kapital ta'mirdan keyin</td></tr>
+            <tr><td>Yerga ulash qarshiligi</td><td>R<sub>yer</sub> (Ω)</td><td>≤ 4 Ω (0,4 kV uchun)</td><td>Yiliga 1 marta</td></tr>
+            <tr><td>O'tkazgich qarshiligi</td><td>R<sub>DC</sub> (mΩ)</td><td>Zavod qiymati ±10%</td><td>Kapital ta'mirdan keyin</td></tr>
+            <tr><td>Kontaktlar qarshiligi</td><td>R<sub>k</sub> (mkΩ)</td><td>≤ 50÷200 mkΩ</td><td>6 oyda 1 marta</td></tr>
+          </table>
+
+          <h3>Izolyatsiya sinovi uchun megaommetr tanlash</h3>
+          <table>
+            <tr><th>Nominal kuchlanish</th><th>Megaommetr kuchlanishi</th><th>Min. ruxsat etilgan qiymat</th></tr>
+            <tr><td>Do 0,5 kV</td><td>500 V</td><td>0,5 MΩ</td></tr>
+            <tr><td>0,5 – 1 kV</td><td>1000 V</td><td>1 MΩ</td></tr>
+            <tr><td>3 – 10 kV</td><td>2500 V</td><td>6 MΩ</td></tr>
+            <tr><td>35 kV va undan yuqori</td><td>2500 V</td><td>300 MΩ</td></tr>
+          </table>
+
+          <div class="info-box">
+            <strong>Muhim:</strong> Izolyatsiya qarshiligi o'lchovi 60 soniyadan keyin olinadi (<em>R<sub>60</sub></em>). Quritish kerakligi kriteri: R<sub>60</sub>/R<sub>15</sub> ≥ 1,3 (absorptsiya koeffitsienti).
+          </div>
+        </div>
+      </div>
+
+      <div class="section pract">
+        <div class="section-header">🛠 Amaliy jarayonlar va bosqichlar</div>
+        <div class="section-body">
+          <h3>Sinov o'tkazish algoritmi</h3>
+          <ol class="steps">
+            <li><strong>Tayyorgarlik:</strong> Texnik hujjatlarni (pasport, sxema) o'rganish; sinov asboblarini tekshirish (MΩ-metr, kuchlanish sinov bloki, erga ulash o'lchovchisi).</li>
+            <li><strong>Jihozni de-energizatsiya qilish:</strong> Barcha kuchlanish manbaini o'chirish; "Yoqma!" plakatini osish; yerga ulash qisqichlarini ulash.</li>
+            <li><strong>Ko'rgazmali tekshiruv:</strong> Izolatorlar, klemma qutisi, magistralli ulashlar, mexanik shikastlanishlar.</li>
+            <li><strong>Izolyatsiya qarshiligini o'lchash:</strong> Har bir faza alohida, qolgan fazalar yerga ulangan holda. O'lchov natijalarini jurnalga kiritish.</li>
+            <li><strong>Kontakt ulash nuqtalarini tekshirish:</strong> Termovizor yoki kontakt mikroommetr bilan.</li>
+            <li><strong>Yuqori kuchlanish sinovi (zarur bo'lsa):</strong> Sinovchi transformator orqali belgilangan kuchlanishni 1 daqiqa davomida berish.</li>
+            <li><strong>Yerga ulash zanjirini tekshirish:</strong> M416 asbob yoki analoglaridan foydalanib R<sub>yer</sub> ni o'lchash.</li>
+            <li><strong>Natijalarni rasmiylashtirish:</strong> Sinov protokolini to'ldirish, imzo qo'yish; davlat nazorat organlari uchun nusxa tayyorlash.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="section fault">
+        <div class="section-header">⚠️ Nosozliklar va bartaraf etish usullari</div>
+        <div class="section-body">
+          <table>
+            <tr><th>Nosozlik</th><th>Belgilari</th><th>Sababi</th><th>Bartaraf etish</th></tr>
+            <tr><td>Past izolyatsiya qarshiligi</td><td>R &lt; normativdan</td><td>Nam, eskirish, mexanik shikast</td><td>Quritish, izolyatsiya almashtirish</td></tr>
+            <tr><td>Yuqori kontakt qarshiligi</td><td>Issiqlanish, spark</td><td>Oksidlanish, siqish yetarli emas</td><td>Tozalash, siqish kuchini sozlash</td></tr>
+            <tr><td>Yerlama zanjiri uzilishi</td><td>R<sub>yer</sub> → ∞</td><td>Korroziya, mexanik shikast</td><td>Erlama elektrodini almashtirish</td></tr>
+            <tr><td>Sig'im oqimi ortib ketishi</td><td>Megaommetrda tebranma ko'rsatish</td><td>Kabel yoshi, nam</td><td>Sinovni qismlarga ajratib takrorlash</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="section safety">
+        <div class="section-header">🛑 Xavfsizlik texnikasi qoidalari</div>
+        <div class="section-body">
+          <div class="safety-box">
+            <div class="safety-title">🚨 MAJBURIY TALABLAR</div>
+            <ul>
+              <li>Sinovlarni faqat <strong>tegishli guruhga ega</strong> (III va yuqori) elektrotexnik xodimlar o'tkazishi mumkin.</li>
+              <li>Yuqori kuchlanish sinovi kamida <strong>2 nafar xodim</strong> ishtirokida amalga oshiriladi.</li>
+              <li>Sinov zonasida <strong>to'siq va ogohlantiruvchi plakatlar</strong> o'rnatilishi shart.</li>
+              <li>Sinovchi transformator yoki kilovoltmetr ulangandan keyin jihozga <strong>qo'l tekkizish taqiqlanadi</strong>.</li>
+              <li>O'lchov asboblari <strong>davlat tekshiruvidan o'tgan</strong> bo'lishi lozim (sertifikat bo'lishi kerak).</li>
+              <li>Megaommetr bilan ishlashda qo'llarda <strong>dielektrik qo'lqop</strong> kiyiladi.</li>
+              <li>Sinov tugagach, sinovchi transformatorni o'chirib, kondensatorni razryad qilish (yerga ulash orqali) majburiydir.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+  <!-- ═══════════════════════════════════════════ MAVZU 21 ═══ -->
+  <details id="t21">
+    <summary>
+      <div class="topic-num">21</div>
+      <div class="topic-title">Kuch transformatorlarini ishlatish va ta'mirlash</div>
+      <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    </summary>
+    <div class="content">
+
+      <div class="section annot">
+        <div class="section-header">📌 Annotatsiya</div>
+        <div class="section-body">
+          <p>Kuch transformatori — elektr tizimining asosiy elementi bo'lib, kuchlanishni o'zgartirish va energiyani uzatish vazifasini bajaradi. To'g'ri ishlatish va o'z vaqtida ta'mirlash transformatorning ish muddatini uzaytiradi, avariyalarni oldini oladi.</p>
+          <p>Kuch transformatorlari <strong>S = 25 kVA</strong> dan boshlab megavolt-amperli quvvatlargacha ishlab chiqariladi. Ularning ishlatilishi PTE 5.3, 5.4-bandlari asosida tartibga solinadi.</p>
+        </div>
+      </div>
+
+      <div class="section theory">
+        <div class="section-header">📚 Nazariy asoslar</div>
+        <div class="section-body">
+          <h3>Transformatorning asosiy parametrlari</h3>
+          <ul>
+            <li><strong>Nominal quvvat (S<sub>n</sub>)</strong>: kVA yoki MVA</li>
+            <li><strong>Nominal kuchlanishlar (U<sub>1n</sub>, U<sub>2n</sub>)</strong>: kV</li>
+            <li><strong>Qisqa tutashuv kuchlanishi (U<sub>k</sub>%)</strong>: odatda 4–6%</li>
+            <li><strong>Bo'sh yurishda yo'qotish (ΔP<sub>0</sub>)</strong>: W yoki kW</li>
+            <li><strong>Qisqa tutashuv yo'qotishi (ΔP<sub>k</sub>)</strong>: W yoki kW</li>
+            <li><strong>Transformatsiya koeffitsienti (k)</strong>: <code>k = U₁/U₂ = w₁/w₂</code></li>
+          </ul>
+
+          <span class="formula">k = U₁n / U₂n = w₁ / w₂ = I₂n / I₁n</span>
+
+          <h3>Yuklanish koeffitsienti va FIK</h3>
+          <span class="formula">β = S / Sn ;  η = (β·Sn·cosφ) / (β·Sn·cosφ + ΔP₀ + β²·ΔPk) × 100%</span>
+
+          <h3>Transformator ishlashining asosiy rejimlari</h3>
+          <table>
+            <tr><th>Rejim</th><th>Tavsif</th><th>Ruxsat etilgan davomiylik</th></tr>
+            <tr><td>Nominal yuklanish</td><td>β = 1,0; cosφ = 0,9</td><td>Cheksiz</td></tr>
+            <tr><td>Ortiqcha yuklanish</td><td>β = 1,05÷1,5</td><td>GOST 14209 bo'yicha cheklangan</td></tr>
+            <tr><td>Bo'sh yurish</td><td>I₁ = I₀ (1–3%)</td><td>Ruxsat etilgan</td></tr>
+            <tr><td>Qisqa tutashuv</td><td>U = Uk%</td><td>Faqat sinov uchun qisqa muddatli</td></tr>
+          </table>
+
+          <div class="warn-box">
+            <strong>GOST 14209-97</strong> bo'yicha transformatorni sistemali ortiqcha yuklanishga ruxsat etiladi, lekin umumiy qizib ketish 98°C dan oshmasligi va maxsus jadvalda ko'rsatilgan vaqt chegarasidan oshmasligi shart.
+          </div>
+
+          <h3>Ta'mirlash turlari va muddatlari</h3>
+          <table>
+            <tr><th>Ta'mirlash turi</th><th>Hajmi</th><th>Davriyligi</th></tr>
+            <tr><td>Joriy ta'mirlash (T)</td><td>Tashqi ko'rikchi tekshiruv, moy to'ldirish, quvurlar tozalash</td><td>1 yilda 1 marta</td></tr>
+            <tr><td>O'rta ta'mirlash (O)</td><td>Moy almashtirish, izolyatsiya o'lchash, contactor tekshirish</td><td>2–4 yilda 1 marta</td></tr>
+            <tr><td>Kapital ta'mirlash (K)</td><td>Magnit o'tkazgich, chulg'amlar, Buchholz, RPN to'liq tekshiruv</td><td>12–15 yilda 1 marta</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="section pract">
+        <div class="section-header">🛠 Amaliy jarayonlar</div>
+        <div class="section-body">
+          <h3>Kapital ta'mirlash bosqichlari</h3>
+          <ol class="steps">
+            <li><strong>De-energizatsiya va xavfsizlikni ta'minlash:</strong> Transformatorni elektr tarmog'idan uzish, yerga ulash, plakatlar osish.</li>
+            <li><strong>Moyni chiqarish:</strong> Maxsus rezervuarga qochirish; moy namunasini tahlil uchun olish.</li>
+            <li><strong>Kengaytirgich va Buchholz relesini demontaj qilish:</strong> Truboprovod ulanmalarini tekshirish.</li>
+            <li><strong>Yopqich (kryshka) ni ochish:</strong> Bolt-gaykalarni tartib bilan bo'shatish; yopqichni maxsus ko'taruvchi moslamada ko'tarish.</li>
+            <li><strong>Aktiv qismni ko'rib chiqish:</strong> Magnit o'tkazgich, chulg'amlar, izolatsion gil'zalar, presslashtiruvchi konstruktsiya.</li>
+            <li><strong>Chulg'amlar izolyatsiyasini tekshirish:</strong> Megaommetr bilan; ehtiyoj bo'lsa quritish.</li>
+            <li><strong>Mexanik ta'mirlash:</strong> Shpilka, bolt, gаyka tozalash va almashtiirsh; zichlash qistirmalarini yangilash.</li>
+            <li><strong>Yig'ish va moy to'ldirish:</strong> Tozalangan yoki yangi moy quyish; havo qoldirmaslik uchun filtr orqali quyish.</li>
+            <li><strong>Sinovlarni o'tkazish:</strong> Izolyatsiya o'lchash, bo'sh yurish sinoví, qisqa tutashuv sinoví.</li>
+            <li><strong>Qabul qilish:</strong> Protokol rasmiylashtirish, transformatorni ishga qo'yish ruxsatnomasi olish.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="section fault">
+        <div class="section-header">⚠️ Nosozliklar va bartaraf etish</div>
+        <div class="section-body">
+          <table>
+            <tr><th>Nosozlik</th><th>Sababi</th><th>Belgilari</th><th>Bartaraf etish</th></tr>
+            <tr><td>Ortiqcha issiqlash</td><td>Ortiqcha yuklanish, moy siri buzilgan</td><td>Harorat indikatori sariqdan qizilga</td><td>Yuklanishni kamaytirish, moyni tekshirish</td></tr>
+            <tr><td>Buchholz relesi ishga tushishi</td><td>Ichki qo'zg'alishlar, moy sizi</td><td>Signal yoki trip</td><td>Gazni tahlil qilish, jihozni ko'rib chiqish</td></tr>
+            <tr><td>Chulg'amlar orasidagi tutashuv</td><td>Izolyatsiya yoshi, mexanik shikast</td><td>Past izolyatsiya, tok ortishi</td><td>Chulg'amni almashtiirsh</td></tr>
+            <tr><td>Moy sizishi</td><td>Zichlash yeyilishi, korroziya</td><td>Idish tagida moy izlari</td><td>Qistirma almashtirish, payvandlash</td></tr>
+            <tr><td>RPN ishi buzilishi</td><td>Kontaktlar yeyilishi</td><td>Kuchlanish regulatsiyasi yo'qligi</td><td>Kontaktlarni tozalash/almashtirish</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="section safety">
+        <div class="section-header">🛑 Xavfsizlik texnikasi</div>
+        <div class="section-body">
+          <div class="safety-box">
+            <div class="safety-title">🚨 XAVFSIZLIK TALABLARI</div>
+            <ul>
+              <li>Transformatorni ta'mirlash faqat <strong>to'liq de-energizatsiya</strong> qilinganidan keyin, yerga ulanganidan keyin boshlanadi.</li>
+              <li>Aktiv qismni ko'tarish uchun <strong>hisoblangan ko'taruvchi mexanizm</strong> ishlatiladi; qo'l bilan ko'tarish taqiqlanadi.</li>
+              <li>Moy bilan ishlashda <strong>yong'in xavfiga</strong> e'tibor beriladi: transformator moyi 140–160°C da alangalanadi.</li>
+              <li>Transformer idishi ichiga kirishda <strong>gaz analizatori</strong> bilan tekshiruv o'tkaziladi (CO₂, SO₂, H₂ chegaralari).</li>
+              <li>Kengaytirgich ichida ishlashda <strong>kanat belbog'i</strong> kiyiladi va kuzatuvchi xodim saqlanadi.</li>
+              <li>Kapital ta'mirlash faqat <strong>mas'ul injener imzolagan narada-ruxsatnoma</strong> asosida boshlanadi.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+  <!-- ═══════════════════════════════════════════ MAVZU 22 ═══ -->
+  <details id="t22">
+    <summary>
+      <div class="topic-num">22</div>
+      <div class="topic-title">Transformator elementlarining ishlashi</div>
+      <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    </summary>
+    <div class="content">
+
+      <div class="section annot">
+        <div class="section-header">📌 Annotatsiya</div>
+        <div class="section-body">
+          <p>Kuch transformatori bir qator konstruktiv elementlardan tashkil topgan bo'lib, ularning har biri o'z vazifasini bajaradi. Elementlarning ishlashini tushunish texnik xizmat ko'rsatish va nosozliklarni aniqlashda asosiy amaliy bilim hisoblanadi.</p>
+        </div>
+      </div>
+
+      <div class="section theory">
+        <div class="section-header">📚 Nazariy asoslar — Elementlar va ularning vazifalari</div>
+        <div class="section-body">
+          <h3>1. Magnit o'tkazgich (Магнитопровод)</h3>
+          <p>Transformator yadrosini tashkil etadi. Elektr texnik po'latning yupqa (0,27–0,5 mm) plastinkalaridan yig'iladi. Vazifasi — magnit oqimini samarali o'tkazish va Fuko toklarini kamaytirish.</p>
+          <ul>
+            <li><strong>Sterzhen</strong> — chulg'amlar o'ralgan qism</li>
+            <li><strong>Igo</strong> — sterjenlarni birlashtiradigan qism</li>
+            <li>Plastinkalar orasida lak qatlami — elektr izolyatsiyasi</li>
+          </ul>
+
+          <h3>2. Chulg'amlar (Обмотки)</h3>
+          <p>Mis yoki alyuminiy o'tkazgichdan tayyorlanadi. Katta quvvatli transformatorlarda mis, kichiklarda alyuminiy qo'llaniladi.</p>
+          <table>
+            <tr><th>Chulg'am turi</th><th>Joylashuvi</th><th>Izolyatsiya</th></tr>
+            <tr><td>Birlamchi (yuqori kuchlanishli)</td><td>Tashqi tomondan</td><td>Qalin izolyatsion qog'oz + presshpan</td></tr>
+            <tr><td>Ikkilamchi (past kuchlanishli)</td><td>Magnit o'tkazgichga yaqin</td><td>Nisbatan yupqa izolyatsiya</td></tr>
+            <tr><td>Tartibga solish chulg'ami (RPN uchun)</td><td>Birlamchi chulg'am ichida</td><td>Alohida izolyatsiya</td></tr>
+          </table>
+
+          <h3>3. Moy idishi (Бак)</h3>
+          <p>Transformator yog'i (TR-25, TKp va boshqalar) bilan to'ldirilgan po'lat idish. Vazifasi: izolyatsiya va sovutish. Kovşirik (rebra) idishning yon yuzasida sovutish yuzasini oshiradi.</p>
+
+          <h3>4. Kengaytirgich (Расширитель)</h3>
+          <p>Moy hajmining haroratga qarab o'zgarishini kompensatsiyalash uchun mo'ljallangan qo'shimcha idish. Asosiy idish bilan quvur orqali bog'langan.</p>
+          <ul>
+            <li>Silikat gel (silikagel) bilan filtrlovchi tiqin — namdan himoya</li>
+            <li>Moy sathini ko'rsatuvchi oyna</li>
+          </ul>
+
+          <h3>5. Buchholz relesi</h3>
+          <p>Ichki qo'zg'alishlarni va aktiv qism bilan kengaytirgich orasidagi quvurda moy oqimining pasayishini nazorat qiladi. Signal va trip kontaktlari mavjud.</p>
+          <div class="info-box">Buchholz relesi asimmetrik issiqlik yoki qo'zg'alish natijasida hosil bo'lgan gazni yig'ib, belgilangan miqdorda to'planganda signal beradi yoki transformatorni o'chiradi.</div>
+
+          <h3>6. RPN va PBV qurilmalari</h3>
+          <ul>
+            <li><strong>PBV</strong> (Pereklyuchatel' bez vozbuzhdeniya) — faqat de-energizatsiya holatida kuchlanishni ±5% gacha rostlash</li>
+            <li><strong>RPN</strong> (Regulirovanie pod nagruzkoy) — yuklanish ostida kuchlanishni ±16% va undan ko'p gacha rostlash</li>
+          </ul>
+
+          <h3>7. Izolyatorlar (Vtulki)</h3>
+          <p>Yuqori va past kuchlanish toklari idish qopqog'i orqali o'tkaziluvchi farfor yoki polimer izolyatorlar. Kuchlanishga qarab soni va izolyatsiya darajasi farqlanadi.</p>
+
+          <h3>8. Sovutish tizimi</h3>
+          <table>
+            <tr><th>Sovutish turi</th><th>Belgisi</th><th>Quvvat diapazoni</th></tr>
+            <tr><td>Tabiiy moy sirkulyatsiyasi</td><td>ONAN (M)</td><td>Kichik va o'rta</td></tr>
+            <tr><td>Ventilyatorli sovutish</td><td>ONAF (D)</td><td>O'rta va katta</td></tr>
+            <tr><td>Majburiy moy sirkulyatsiyasi</td><td>OFAN (MC)</td><td>Katta va o'ta katta</td></tr>
+            <tr><td>Suv sovutgich</td><td>OFWF (Ts)</td><td>Eng katta</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="section pract">
+        <div class="section-header">🛠 Amaliy: Elementlarni tekshirish tartibı</div>
+        <div class="section-body">
+          <ol class="steps">
+            <li><strong>Magnit o'tkazgichni tekshirish:</strong> Sterjenlar va igolarning siqilishini, silliqlashni, oksidlanishni vizual ko'rish; mag'iz bolti bilan yerga ulanishini tekshirish.</li>
+            <li><strong>Chulg'amlar izolyatsiyasini tekshirish:</strong> Megaommetr bilan R<sub>iz</sub> o'lchash; sirtdagi izolyatsion material holatini ko'rish.</li>
+            <li><strong>Buchholz relesini tekshirish:</strong> Pufakchalar yo'qligini tekshirish; kontaktlarning ishlashini signal generatori bilan siylash.</li>
+            <li><strong>Kengaytirgichni tekshirish:</strong> Moy satҳini belgilangan ±2 sm chegarasida bo'lishini kuzatish; silikagel rangini tekshirish (moviy = quruq, pushti = ho'l).</li>
+            <li><strong>Izolyatorlarni tekshirish:</strong> Yoriqlar, chiqindilar, yog' izlari uchun ko'rgazmali tekshiruv; tozalash.</li>
+            <li><strong>RPN/PBV mexanizmini tekshirish:</strong> O'tish vaqtini va kontaktlar holatini tekshirish.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="section fault">
+        <div class="section-header">⚠️ Element nosozliklari</div>
+        <div class="section-body">
+          <table>
+            <tr><th>Element</th><th>Nosozlik</th><th>Oqibati</th><th>Bartaraf etish</th></tr>
+            <tr><td>Magnit o'tkazgich</td><td>Plastinka izolyatsiyasi buzilishi</td><td>Fuko toklari ortishi, issiqlash</td><td>Qayta lak qo'llash yoki almashtirish</td></tr>
+            <tr><td>Chulg'am</td><td>Qisqa tutashuv navbatlar orasida</td><td>Tok ortishi, issiqlash, vizbing</td><td>Kapital ta'mirlash, chulg'am almashtirish</td></tr>
+            <tr><td>Buchholz relesi</td><td>Yolg'on ishlash</td><td>Keraksiz o'chirish</td><td>Gaz tahlili o'tkazish, releni tekshirish</td></tr>
+            <tr><td>Kengaytirgich</td><td>Siz berish, nam</td><td>Moy sifati yomonlashishi</td><td>Filtrni almashtirish, siz beruvchi joyni tuzatish</td></tr>
+            <tr><td>RPN</td><td>Kontaktlar yeyilishi</td><td>Kuchlanish tebranishi</td><td>Kontaktlarni yangilash</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="section safety">
+        <div class="section-header">🛑 Xavfsizlik texnikasi</div>
+        <div class="section-body">
+          <div class="safety-box">
+            <div class="safety-title">🚨 MUHIM OGOHLANTIRISHLAR</div>
+            <ul>
+              <li>Transformator elementlarini tekshirishda ish ruxsatnomasi (наряд-допуск) rasmiylashtirilishi shart.</li>
+              <li>Buchholz relesidan gazni chiqarishda kichik miqdor ham <strong>portlovchi aralashma</strong> hosil qilishi mumkin — olov va uchqundan uzoqda bajarilsin.</li>
+              <li>Moy bilan ishlashda <strong>rezina qo'lqop va ko'zoynak</strong> kiyiladi.</li>
+              <li>Kengaytirgichni ko'rishda simob termometri sinmagan bo'lishi tekshirilsin — simob <strong>o'ta zaharli</strong> moddadir.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+  <!-- ═══════════════════════════════════════════ MAVZU 23 ═══ -->
+  <details id="t23">
+    <summary>
+      <div class="topic-num">23</div>
+      <div class="topic-title">Kuch transformatorlarini ishga tushirishdan oldin sinovdan o'tkazish</div>
+      <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    </summary>
+    <div class="content">
+
+      <div class="section annot">
+        <div class="section-header">📌 Annotatsiya</div>
+        <div class="section-body">
+          <p>Yangi o'rnatilgan yoki ta'mirdan chiqqan transformatorni ishga tushirishdan oldin qabul qilish sinovlari o'tkaziladi. Bu sinovlar transformatorning texnik holati, izolyatsiya salomatligi, moy sifati va himoya qurilmalarining to'g'ri ishlashini tasdiqlaydi.</p>
+        </div>
+      </div>
+
+      <div class="section theory">
+        <div class="section-header">📚 Nazariy asoslar va normalar</div>
+        <div class="section-body">
+          <h3>Qabul qilish sinov dasturi (PTE 5.3 asosida)</h3>
+          <table>
+            <tr><th>Sinov turi</th><th>O'lchanadigan kattaldik</th><th>Normativ qiymat</th></tr>
+            <tr><td>Izolyatsiya qarshiligi (chulg'am 1–yer)</td><td>R<sub>60</sub> va R<sub>60</sub>/R<sub>15</sub></td><td>Zavod qiymatining 50% dan ko'p; k≥1,3</td></tr>
+            <tr><td>Izolyatsiya qarshiligi (chulg'am 1–chulg'am 2)</td><td>R<sub>60</sub></td><td>≥ 300 MΩ (10 kV uchun)</td></tr>
+            <tr><td>Yuqori kuchlanish sinovi</td><td>U<sub>sinov</sub>, 1 daqiqa</td><td>GOST bo'yicha U<sub>n</sub> × koeffitsienty</td></tr>
+            <tr><td>Bo'sh yurish sinoví</td><td>I₀%, P₀</td><td>Zavod pasportidagi ±10%</td></tr>
+            <tr><td>Qisqa tutashuv sinoví</td><td>U<sub>k</sub>%, P<sub>k</sub></td><td>Zavod pasportidagi ±10%</td></tr>
+            <tr><td>Moy tangensi tg δ</td><td>Dielektrik yo'qotishlar burchagi</td><td>≤ 0,7% (25°C da)</td></tr>
+            <tr><td>Transformatsiya koeffitsienti k</td><td>U₁/U₂</td><td>Har fazada ±0,5% farq</td></tr>
+            <tr><td>Ulash guruhini tekshirish</td><td>Fazalar siljishi</td><td>Pasportdagi belgi bilan mos</td></tr>
+          </table>
+
+          <h3>Ulash guruhlari</h3>
+          <p>Transformatorning birlamchi va ikkilamchi chulg'amlarining fazoviy siljish burchagi 30° × N (N=0,1...11) ga teng bo'lib, ulash guruhi deyiladi. Masalan:</p>
+          <ul>
+            <li><strong>Y/Y-0</strong> — ikkala chulg'am yulduzcha, 0° siljish</li>
+            <li><strong>Y/Δ-11</strong> — birlamchi yulduzcha, ikkilamchi uchburchak, 330° siljish</li>
+            <li><strong>Y₀/Δ-11</strong> — nol chiqish bilan yulduzcha / uchburchak</li>
+          </ul>
+          <div class="warn-box">Paralel ulash uchun transformatorlarning ulash guruhi <strong>bir xil</strong> bo'lishi shart, aks holda avariya yuz beradi.</div>
+        </div>
+      </div>
+
+      <div class="section pract">
+        <div class="section-header">🛠 Sinovlarni o'tkazish bosqichlari</div>
+        <div class="section-body">
+          <ol class="steps">
+            <li><strong>Hujjatlarni tekshirish:</strong> Zavod pasporti, montaj akti, moy tahlil sertifikati mavjudligi.</li>
+            <li><strong>Ko'rgazmali tekshiruv:</strong> Izolyatorlar, moy sathi, kengaytirgich, Buchholz relesi, termometr, silikagel holati.</li>
+            <li><strong>Yerga ulash zanjirini tekshirish:</strong> Idish, magnit o'tkazgich, nol shina yerga ulanganligi.</li>
+            <li><strong>Izolyatsiya qarshiligini o'lchash:</strong> Megaommetr 2500V bilan har bir chulg'amni alohida. Natijalarni t°C ga muvofiq korreksiya qilish.</li>
+            <li><strong>Transformatsiya koeffitsienti va ulash guruhini tekshirish:</strong> Fazometr yoki voltmetr usuli.</li>
+            <li><strong>Bo'sh yurish sinoví:</strong> Ikkilamchi chulg'amga voltmetr ulash; birlamdhi chulg'amga nominal kuchlanish berish; I₀ va P₀ ni o'lchash.</li>
+            <li><strong>Qisqa tutashuv sinoví:</strong> Ikkilamchi chulg'amni qisqa tutashtirish; birlamchi tomondan U<sub>k</sub>% kuchlanish berish; P<sub>k</sub> ni o'lchash.</li>
+            <li><strong>Moy sinovlari:</strong> Elektrik mustahkamlik (击穿 kuchlanishi ≥ 30 kV), tg δ, suv tarkibi.</li>
+            <li><strong>Buchholz relesini siylash:</strong> Gaz kiritish yoki magnit bilan siylash orqali signal va trip ishlashini tekshirish.</li>
+            <li><strong>Natijalarni rasmiylashtirish va taqdim etish:</strong> Sinov protokoli → mas'ul muhandis imzosi → qurilmaga qo'yish ruxsatnomasi.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="section fault">
+        <div class="section-header">⚠️ Sinov vaqtida aniqlanadigan nosozliklar</div>
+        <div class="section-body">
+          <table>
+            <tr><th>Nosozlik</th><th>Sinov turi</th><th>Belgi</th><th>Choralar</th></tr>
+            <tr><td>Past izolyatsiya</td><td>R<sub>iz</sub> o'lchov</td><td>R &lt; 50% zavod qiymati</td><td>Quritish, kerak bo'lsa kapital ta'mirlash</td></tr>
+            <tr><td>Chulg'amlar orasida tutashuv</td><td>Bo'sh yurish</td><td>I₀ ortishi, P₀ > norma</td><td>Chulg'amni ko'rish, ta'mirlash</td></tr>
+            <tr><td>Noto'g'ri ulash guruhi</td><td>Guruh tekshiruvi</td><td>Fazometrda kutilmagan qiymat</td><td>Ulashlarni qayta ko'rish</td></tr>
+            <tr><td>Moy ifloslanishi</td><td>击穿 kuchlanishi</td><td>&lt; 30 kV</td><td>Moyni filtrdan o'tkazish yoki almashtirish</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="section safety">
+        <div class="section-header">🛑 Xavfsizlik texnikasi</div>
+        <div class="section-body">
+          <div class="safety-box">
+            <div class="safety-title">🚨 QABUL QILISH SINOVLARI XAVFSIZLIGI</div>
+            <ul>
+              <li>Yuqori kuchlanish sinovi o'tkazilayotganda transformatordan <strong>kamida 3 m masofada</strong> xavfsizlik chegarasi o'rnatilsin.</li>
+              <li>Sinovchi transformator yoki kilovolt-metr ulangandan keyin <strong>birortasi ham qurilmaga tegmasin</strong> — bu mutlaq taqiq.</li>
+              <li>Bo'sh yurish sinovida barcha xodimlar <strong>ikkilamchi chulg'amdan uzoqda</strong> bo'lishi kerak (yuqori kuchlanish induksiyasi mumkin).</li>
+              <li>Moy namunasini olishda <strong>yanib turgan chiroq, sigaret** yaqinida ishlamang — moy bug'lari yonuvchi.</li>
+              <li>Sinov kompleksining yerga ulanishi <strong>har safar tekshirilsin</strong> — sinoychining hayoti shunda.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+  <!-- ═══════════════════════════════════════════ MAVZU 24 ═══ -->
+  <details id="t24">
+    <summary>
+      <div class="topic-num">24</div>
+      <div class="topic-title">Transformatorning yuklamasini harorati va izolyatsiyasini yopish, quritish, moyiga qo'yiladigan talablar, moyni quritish, tozalash va tiklash</div>
+      <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    </summary>
+    <div class="content">
+
+      <div class="section annot">
+        <div class="section-header">📌 Annotatsiya</div>
+        <div class="section-body">
+          <p>Transformatorning ish qobiliyati va muddati ko'p jihatdan moy sifatiga va izolyatsiya holatiga bog'liq. Moy bir vaqtning o'zida <strong>izolyatsiya vositasi</strong> va <strong>issiqlik uzatkichi</strong> sifatida ishlaydi. Shuning uchun moy parametrlarini nazorat qilish, quritish, tozalash va zarur bo'lsa tiklash — texnik xizmatning muhim qismidir.</p>
+        </div>
+      </div>
+
+      <div class="section theory">
+        <div class="section-header">📚 Nazariy asoslar</div>
+        <div class="section-body">
+          <h3>Transformator moyiga qo'yiladigan asosiy talablar (GOST 982-80)</h3>
+          <table>
+            <tr><th>Parametr</th><th>Norma (yangi moy)</th><th>Norma (ishlatilayotgan moy)</th></tr>
+            <tr><td>击穿 kuchlanishi, kV</td><td>≥ 40 (10 kV uchun) / ≥ 60 (110 kV uchun)</td><td>≥ 30 / ≥ 45</td></tr>
+            <tr><td>Suv tarkibi, %</td><td>&lt; 0,003</td><td>&lt; 0,01</td></tr>
+            <tr><td>Kislota soni, mg KOH/g</td><td>&lt; 0,02</td><td>&lt; 0,1</td></tr>
+            <tr><td>tg δ, 25°C da, %</td><td>&lt; 0,5</td><td>&lt; 2,0</td></tr>
+            <tr><td>Alangalanish harorati, °C</td><td>≥ 150 (TR-25 uchun)</td><td>≥ 140</td></tr>
+            <tr><td>Qovushqoqlik, mm²/s (20°C)</td><td>28–45</td><td>28–65</td></tr>
+          </table>
+
+          <h3>Transformator haroratini nazorat qilish</h3>
+          <ul>
+            <li><strong>Moy yuqori qatlamining ruxsat etilgan harorati:</strong> +95°C (shamollatilgan sovutish bilan)</li>
+            <li><strong>Chulg'am o'rovining eng yuqori harorati:</strong> +98°C (GOST 14209)</li>
+            <li><strong>Ambient harorat:</strong> +40°C gacha (standart); +50°C yoki -60°C — maxsus modifikatsiya</li>
+          </ul>
+          <div class="warn-box">Harorat har 8°C ga oshganda izolyatsiya yoshi taxminan 2 barobarga qisqaradi (Montsinger qoidasi). Shuning uchun ortiqcha issiqlash izolyatsiyani tezlik bilan eskalatiradi.</div>
+
+          <h3>Izolyatsiyani yopish (герметизация)</h3>
+          <p>Zamonaviy kuch transformatorlarida havo bilan moying kontakti <strong>azot yostiqchasi</strong> yoki <strong>membrana tizimi</strong> orqali kamaytiriladi. Bu okislanish va namning so'rilishini oldini oladi.</p>
+          <ul>
+            <li>Eski transformatorlarda: silikagel (SiO₂) filtr nam tortuvchi sifatida</li>
+            <li>Yangi konstruktsiyalarda: kengaytirgich ichida rezina diafragma yoki azot bosimi</li>
+          </ul>
+
+          <h3>Moy qarishi mexanizmi</h3>
+          <p>Moy qarishi uchta asosiy jarayon orqali sodir bo'ladi:</p>
+          <ol>
+            <li><strong>Oksidlanish</strong> — havo kislorodi bilan reaksiya; turush va lak hosil bo'lishi</li>
+            <li><strong>Namlanish</strong> — suv bug'ining moy ichiga so'rilishi; izolyatsiya qarshiligi pasayishi</li>
+            <li><strong>Issiqlik parchalanishi</strong> — kuchli qizish natijasida moy tarkibining o'zgarishi; gazlar ajralib chiqishi</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="section pract">
+        <div class="section-header">🛠 Moyni quritish, tozalash va tiklash texnologiyasi</div>
+        <div class="section-body">
+          <h3>A. Moyni quritish usullari</h3>
+          <ol class="steps">
+            <li><strong>Vakuum quritish:</strong> Moy 60–70°C ga qizdirilib, vakuum ostida (≤ 1 kPa) suv bug'i ajratiladi. Eng samarali usul.</li>
+            <li><strong>Isitish va tindirishb:</strong> Moy 55–60°C gacha qizdiriladi; 24–48 soat tindirilib, suv cho'kmasiga ajratiladi. Oddiy usul.</li>
+            <li><strong>Silika-gel orqali filtrlash:</strong> Moy nasosda silika-gel ustunidan o'tkaziladi; nam va qattiq zarralar ushlanib qoladi.</li>
+          </ol>
+
+          <h3>B. Moyni tozalash (filtratsiya)</h3>
+          <ol class="steps">
+            <li><strong>Filtr-pres orqali o'tkazish:</strong> Karton yoki sellyuloza filtrlari ishlatiladi. Mehkanik qo'shimchalar va suvni ajratib oladi.</li>
+            <li><strong>Sentrifugalash:</strong> Moy aylanma kuchda og'ir (suv, loyqa) va yengil (moy) fraksiyalarga ajratiladi.</li>
+            <li><strong>Sorbent tozalash:</strong> Namunaviy alyumogellar oksidlanish mahsulotlarini yutib oladi.</li>
+          </ol>
+
+          <h3>C. Moyni tiklash (regeneratsiya)</h3>
+          <p>Kislota soni yuqori va rangi to'q bo'lgan moyni to'liq almashtirmasdan oldin regeneratsiya qilinadi:</p>
+          <ol class="steps">
+            <li>Moyni <strong>soda eritmasi</strong> (NaOH 0,5%) bilan aralashtirib kislotalarni neytrallash.</li>
+            <li>Suvli qatlam ajralgandan keyin suv bilan yuviladi.</li>
+            <li>Regeneratordan (alyumogel ustunli apparat) o'tkazish.</li>
+            <li>Vakuum-quritish o'tkazish.</li>
+            <li>击穿 kuchlanishi va tg δ ni o'lchab, normaga muvofiqligini tekshirish.</li>
+          </ol>
+
+          <h3>Transformatorni quritish (aktiv qismni)</h3>
+          <p>Izolyatsiya R<sub>iz</sub> si past bo'lganda chulg'amlar quritiladi. Asosiy usullar:</p>
+          <table>
+            <tr><th>Usul</th><th>Ishlash printsipi</th><th>Muddati</th></tr>
+            <tr><td>Qisqa tutashuv orqali qizdirish</td><td>Ikkilamchi chulg'amni qisqa tutashtirish, birlamchiga past kuchlanish berish</td><td>12–48 soat</td></tr>
+            <tr><td>Infraqizil nurlanish</td><td>IR lampalar bilan tashqaridan qizdirish</td><td>8–24 soat</td></tr>
+            <tr><td>Vakuum-quritish kamerasida</td><td>Zavodda 60–80°C + vakuum</td><td>24–72 soat</td></tr>
+          </table>
+          <div class="info-box">Quritish to'liq hisoblanadi: R<sub>iz</sub> nominal qiymatga yetganda va 3–4 soat davomida barqaror bo'lganda.</div>
+        </div>
+      </div>
+
+      <div class="section fault">
+        <div class="section-header">⚠️ Moy bilan bog'liq nosozliklar</div>
+        <div class="section-body">
+          <table>
+            <tr><th>Holat</th><th>Sababi</th><th>Xavfi</th><th>Choralar</th></tr>
+            <tr><td>击穿 kuchlanishi past</td><td>Suv yoki mexanik qo'shimchalar</td><td>Izolyatsiya muvaffaqiyatsizligi</td><td>Quritish, filtrlash</td></tr>
+            <tr><td>Kislota soni yuqori</td><td>Oksidlanish qo'shimchalari</td><td>Metall korroziyasi, izolyatsiya zararlanishi</td><td>Regeneratsiya yoki almashtirish</td></tr>
+            <tr><td>Moy rangining qorayishi</td><td>Issiqlik parchalanishi</td><td>Ichki qo'zg'alish bo'lgan bo'lishi mumkin</td><td>Gaz tahlili, DGA (dissolved gas analysis)</td></tr>
+            <tr><td>Ko'piklanish</td><td>Suv miqdori ortishi</td><td>Izolyatsiya pasayishi</td><td>Darhol quritish</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="section safety">
+        <div class="section-header">🛑 Xavfsizlik texnikasi</div>
+        <div class="section-body">
+          <div class="safety-box">
+            <div class="safety-title">🚨 MOY VA QURITISH XAVFSIZLIGI</div>
+            <ul>
+              <li>Transformator moyi <strong>yonuvchi suyuqlik</strong> (alangalanish harorati 140–160°C) — ochiq olov manbalaridan uzoqda saqlash shart.</li>
+              <li>Isitilayotgan moy (quritish paytida) bilan ishlashda <strong>issiqlikbardosh qo'lqop va yuz niqobi</strong> kiyiladi.</li>
+              <li>Qisqa tutashuv orqali quritishda <strong>harorat doimo kuzatilishi</strong> kerak — 85°C dan oshmasligi ta'minlansin.</li>
+              <li>Quritish jarayonida transformator yonida <strong>o't o'chiruvchi vosita</strong> (TF-2, yoki kukunli) tayyor bo'lsin.</li>
+              <li>Moy yig'ish rezervuarlari va nasos liniyalari <strong>yerga ulangan</strong> bo'lishi kerak (statik elektr xavfi).</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+  <!-- ═══════════════════════════════════════════ MAVZU 25 ═══ -->
+  <details id="t25">
+    <summary>
+      <div class="topic-num">25</div>
+      <div class="topic-title">Elektr mashinalarini ishlatish va ta'mirlash</div>
+      <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    </summary>
+    <div class="content">
+
+      <div class="section annot">
+        <div class="section-header">📌 Annotatsiya</div>
+        <div class="section-body">
+          <p>Elektr mashinalari (asinxron va sinxron dvigatellar, generatorlar, to'g'rilagichlar) sanoat korxonalaridagi asosiy mexanizmlarga harakat beruvchi agregatlardir. Ularning to'g'ri ishlatilishi va o'z vaqtida ta'mirlash iqtisodiy samaradorlikni oshiradi, avariyalarni kamaytiradi.</p>
+          <p>Elektr mashinalar ishlatilishi PTE 6-bobi, PTB va ishlab chiqaruvchi zavodning texnik shartlari asosida tartibga solinadi.</p>
+        </div>
+      </div>
+
+      <div class="section theory">
+        <div class="section-header">📚 Nazariy asoslar</div>
+        <div class="section-body">
+          <h3>Asinxron dvigateli — ishlash printsipi</h3>
+          <p>Stator uchfazali tokidan aylanuvchi magnit maydoni hosil bo'ladi. Rotor ushbu maydon bilan induksiya orqali ta'sirlashib, mexanik moment hosil qiladi. Rotorning aylanish tezligi magnit maydoni tezligidan <em>sirpanish (s)</em> ga teng miqdor kichik.</p>
+          <span class="formula">s = (n₁ - n₂) / n₁ × 100% ;  n₁ = 60f/p</span>
+          <p>Bu yerda: n₁ — sinxron tezlik, n₂ — rotor tezligi, f — chastota (Hz), p — qutblar juft soni.</p>
+
+          <h3>Asosiy nominal parametrlar</h3>
+          <table>
+            <tr><th>Parametr</th><th>Belgi</th><th>O'lchov birligi</th></tr>
+            <tr><td>Nominal quvvat</td><td>P<sub>n</sub></td><td>kW</td></tr>
+            <tr><td>Nominal kuchlanish</td><td>U<sub>n</sub></td><td>V</td></tr>
+            <tr><td>Nominal tok</td><td>I<sub>n</sub></td><td>A</td></tr>
+            <tr><td>Nominal aylanish tezligi</td><td>n<sub>n</sub></td><td>aylin/daqiqa</td></tr>
+            <tr><td>Nominal FIK</td><td>η<sub>n</sub></td><td>%</td></tr>
+            <tr><td>Nominal quvvat koeffitsienti</td><td>cos φ<sub>n</sub></td><td>—</td></tr>
+            <tr><td>Izolyatsiya sinfi</td><td>A, E, B, F, H</td><td>—</td></tr>
+          </table>
+
+          <h3>Izolyatsiya sinflari va ruxsat etilgan haroratlar</h3>
+          <table>
+            <tr><th>Sinf</th><th>Max. harorat (°C)</th><th>Qo'llanilishi</th></tr>
+            <tr><td>A</td><td>105</td><td>Kichik motorlar</td></tr>
+            <tr><td>E</td><td>120</td><td>Umumiy sanoat motorlari</td></tr>
+            <tr><td>B</td><td>130</td><td>Keng tarqalgan</td></tr>
+            <tr><td>F</td><td>155</td><td>Yuqori yuklanadigan motorlar</td></tr>
+            <tr><td>H</td><td>180</td><td>O'ta yuqori harorat muhiti</td></tr>
+          </table>
+
+          <h3>Ta'mirlash turlari va davriyligı</h3>
+          <table>
+            <tr><th>Ta'mirlash</th><th>Hajmi</th><th>Davriyligi</th></tr>
+            <tr><td>Texnik xizmat (TO)</td><td>Tozalash, yog'lash, metrik tekshiruv</td><td>Oylik yoki choraklik</td></tr>
+            <tr><td>Joriy ta'mirlash (T1)</td><td>Yupqa tozalash, qistirmalar, podshipniklar</td><td>6–12 oyda</td></tr>
+            <tr><td>O'rta ta'mirlash (T2)</td><td>Chulg'am tekshiruv, rotor muvozanati</td><td>2–3 yilda</td></tr>
+            <tr><td>Kapital ta'mirlash (K)</td><td>To'liq demontaj, izolyatsiya, chulg'am almаshtirish</td><td>5–8 yilda</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="section pract">
+        <div class="section-header">🛠 Kapital ta'mirlash algoritmi</div>
+        <div class="section-body">
+          <ol class="steps">
+            <li><strong>De-energizatsiya va xavfsizlik:</strong> Uzgich o'chiri, yerga ulash, "Ishlamoqda! Yoqma!" plakati.</li>
+            <li><strong>Demontaj:</strong> Muftani va kasnakni qo'pчиnи, qopqoqlarni ochish, rotorni chiqarish.</li>
+            <li><strong>Tozalash:</strong> Siqilgan havo yoki moyli latta bilan yupqa tozalash; kimyoviy erituvchilar bilan chuqur tozalash.</li>
+            <li><strong>Texnik ko'rikki:</strong> Stator va rotor chulg'amlari izolyatsiyasi; magnit o'tkazgich; podshipniklar; tok yig'uvchi qurilma (hal'qalar, щёtkalар); kuzatuv qalqoni.</li>
+            <li><strong>Chulg'amlar ta'miri yoki almashtirishi:</strong> Zarar ko'rgan izolyatsiya qoldiqlari olib tashlanadi; yangi izolyatsion qog'oz o'raladi; lak bilan shimdiriladi; pechda quritiladi.</li>
+            <li><strong>Podshipniklarni almashtirish:</strong> Eski yog'ni siqib chiqarish; yangi podshipnik press bilan o'rnatish; tozalash, yangi yog' solish.</li>
+            <li><strong>Rotor muvozanati:</strong> Dinamik muvozanatlash stanogida tekshirish; og'ir joylarga zaxira yoki balans og'irlik qo'yish.</li>
+            <li><strong>Yig'ish:</strong> Teskari tartibda yig'ish; bo'shliqlar (зазорlar) ni o'lchash; qopqoqlarni tortib mahkamlash.</li>
+            <li><strong>Sinovlar:</strong> Izolyatsiya R<sub>iz</sub>, bo'sh yurish, yuklanish sinoví.</li>
+            <li><strong>Qabul qilish:</strong> Protokol, pasport, tayyor bo'lgan ma'lumotnoma.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="section fault">
+        <div class="section-header">⚠️ Nosozliklar va bartaraf etish</div>
+        <div class="section-body">
+          <table>
+            <tr><th>Nosozlik</th><th>Belgilari</th><th>Sababi</th><th>Bartaraf etish</th></tr>
+            <tr><td>Dvigatель ishga tushmaydi</td><td>Tok yo'q, hum yo'q</td><td>Uzgich nosoz, ta'minot yo'q</td><td>Elektr zanjirini tekshirish</td></tr>
+            <tr><td>Ishga tushadi, lekin aylanmaydi</td><td>Hum bor, tok ortadi</td><td>Mexanik bloklanish, bir faza yo'q</td><td>Mexanik va elektr tekshirish</td></tr>
+            <tr><td>Ortiqcha issiqlash</td><td>Harorat > max</td><td>Ortiqcha yuklanish, sovutish yo'qligi, izolyatsiya zaifligi</td><td>Yuklanish kamaytirish, tozalash, quritish</td></tr>
+            <tr><td>Kuchli titrash</td><td>Shovqin, tebranish</td><td>Muvozanat yo'qligi, podshipnik nosoz</td><td>Muvozanat, podshipnik almashtirish</td></tr>
+            <tr><td>Щётkalarda uchqun</td><td>Ko'rinadigan uchqun</td><td>щётka yeyilishi, hal'qa yuzasi qo'pol</td><td>щётka almashtirish, hal'qa silliqlash</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="section safety">
+        <div class="section-header">🛑 Xavfsizlik texnikasi</div>
+        <div class="section-body">
+          <div class="safety-box">
+            <div class="safety-title">🚨 ELEKTR MASHINALARI TA'MIRI XAVFSIZLIGI</div>
+            <ul>
+              <li>Ta'mirlash boshlanishidan oldin dvigatель <strong>to'liq de-energizatsiya</strong> qilinishi va mexanik bloklanishi (tormoz, qulf) shart.</li>
+              <li>Rotor chiqarishda og'irligiga mos <strong>ko'taruvchi mexanizm</strong> ishlatilsin; qo'lda ko'tarish taqiqlanadi (og'irligi 50 kg dan oshganda).</li>
+              <li>Kimyoviy erituvchilar bilan ishlashda <strong>respirator va rezina qo'lqop</strong> majburiy.</li>
+              <li>Lak bilan shimitish pechkasida <strong>alangalanmaydigan muhit** (N₂) yoki maxsus yopiq pech ishlatiladi.</li>
+              <li>Sinovlar vaqtida rotating qismga <strong>qo'l tekkizish** qat'iyan taqiqlanadi.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+  <!-- ═══════════════════════════════════════════ MAVZU 26 ═══ -->
+  <details id="t26">
+    <summary>
+      <div class="topic-num">26</div>
+      <div class="topic-title">Elektr mashinalarni ishlatishga tushirishdan oldin sinovdan o'tkazish qoplami va normalari</div>
+      <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    </summary>
+    <div class="content">
+
+      <div class="section annot">
+        <div class="section-header">📌 Annotatsiya</div>
+        <div class="section-body">
+          <p>Yangi o'rnatilgan yoki ta'mirdan chiqqan elektr mashinani ishlatishga qo'yishdan oldin belgilangan sinov dasturi bajariladi. Bu dastur PTE 6.3-bandida belgilangan bo'lib, mashina parametrlarining zavod normalariga muvofiqligini tasdiqlaydi.</p>
+        </div>
+      </div>
+
+      <div class="section theory">
+        <div class="section-header">📚 Sinov normalari va parametrlar</div>
+        <div class="section-body">
+          <h3>Asinxron dvigateli uchun sinov dasturi</h3>
+          <table>
+            <tr><th>Sinov turi</th><th>O'lchanadi</th><th>Normativ qiymat</th><th>Sinov asbobi</th></tr>
+            <tr><td>Izolyatsiya qarshiligi (stator)</td><td>R<sub>iz</sub>, MΩ</td><td>≥ 1 MΩ (500V da); ≥ 5 MΩ (6 kV da)</td><td>Megaommetr 500V yoki 1000V</td></tr>
+            <tr><td>Izolyatsiya qarshiligi (rotor, halqali)</td><td>R<sub>iz</sub>, MΩ</td><td>≥ 0,2 MΩ</td><td>Megaommetr 500V</td></tr>
+            <tr><td>Stator chulg'ami qarshiligi (DCR)</td><td>R<sub>DC</sub>, Ω</td><td>Fazalar orasida ±2% dan ko'p emas</td><td>Köprü, mikroommetr</td></tr>
+            <tr><td>Bo'shliq (зазор) tekshiruvi</td><td>δ, mm</td><td>Passport qiymati ± 10%</td><td>Shup (щуп)</td></tr>
+            <tr><td>Mexanik qism tekshiruvi</td><td>Titrash, shovqin</td><td>Titrash ≤ 4,5 mm/s (1000 kVt uchun)</td><td>Vibr-o'lchagich</td></tr>
+            <tr><td>Bo'sh yurish sinoví</td><td>I₀, U, P₀</td><td>I₀ = 25–50% I<sub>n</sub></td><td>Ammeter, wattmeter</td></tr>
+          </table>
+
+          <h3>Sinxron generator uchun qo'shimcha sinovlar</h3>
+          <table>
+            <tr><th>Sinov</th><th>Norma</th></tr>
+            <tr><td>Qo'zg'atish chulg'ami R<sub>iz</sub></td><td>≥ 0,5 MΩ</td></tr>
+            <tr><td>Rotor qutblari simmetryasi</td><td>Farq ≤ 2%</td></tr>
+            <tr><td>Aylanish yo'nalishi</td><td>Pasportdagi bilan mos</td></tr>
+            <tr><td>Sinxronizatsiya sinoví</td><td>U, f, faza mos</td></tr>
+          </table>
+
+          <h3>щётka-kollektör apparati tekshiruvi</h3>
+          <ul>
+            <li>щётkalar kollektorga erkin tegib turishi (bosim 150–250 g/sm²)</li>
+            <li>щётka materiali pasportdagi markaga mos</li>
+            <li>Kollektorning yuzasi silliq va toza</li>
+            <li>Kollektor plastinkalari orasidagi mika pastga tushirilgan (undercut)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="section pract">
+        <div class="section-header">🛠 Sinovlarni o'tkazish bosqichlari</div>
+        <div class="section-body">
+          <ol class="steps">
+            <li><strong>Hujjatlarni tayyorlash:</strong> Pasport, montaj akti, ta'mirlash aktini olish.</li>
+            <li><strong>Ko'rgazmali tekshiruv:</strong> Qo'zg'aluvchi qismlarning erkin harakat qilishi, muft/kasnak tekshiruvi, yog'lash teshiklarida yog' borligini tekshirish.</li>
+            <li><strong>Izolyatsiya R<sub>iz</sub> o'lchash:</strong> Har bir faza alohida; rotor alohida; natijalar qayd etiladi.</li>
+            <li><strong>Stator chulg'ami DCR o'lchash:</strong> Fazalar orasidagi farqni hisoblash.</li>
+            <li><strong>Bo'shliq o'lchash:</strong> 4 nuqtadan (tepadan, pastdan, chapdan, o'ngdan) shup bilan.</li>
+            <li><strong>Bo'sh yurish sinoví:</strong> Nominal kuchlanish beriladi; I₀, P₀ o'lchanadi; titrash va shovqin kuzatiladi.</li>
+            <li><strong>Kichik yuklanish sinoví:</strong> 50% va 100% yuklanishda tok, kuchlanish, harorat o'lchanadi.</li>
+            <li><strong>Yerga ulash va himoya tekshiruvi:</strong> Dvigatель kuzovi, qoplama, muvofiq zanjirlarning yerga ulanishini tekshirish.</li>
+            <li><strong>Qabul qilish protokolini rasmiylashtirish.</strong></li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="section fault">
+        <div class="section-header">⚠️ Sinov vaqtida aniqlanadigan nuqsonlar</div>
+        <div class="section-body">
+          <table>
+            <tr><th>Nuqson</th><th>Sinov turi</th><th>Choralar</th></tr>
+            <tr><td>Past R<sub>iz</sub></td><td>Megaommetr</td><td>Quritish (IK yoki elektr isitish)</td></tr>
+            <tr><td>Fazalar orasida R<sub>DC</sub> farqi > 2%</td><td>Mikroommetr</td><td>Chulg'am ulash nuqtalarini tekshirish</td></tr>
+            <tr><td>Katta bo'shliq farqi</td><td>Shup</td><td>Podshipnik o'rnini tekshirish, podshipnik almashtirish</td></tr>
+            <tr><td>Titrash normadan yuqori</td><td>Vibr-o'lchagich</td><td>Muvozanat tekshirish/sozlash</td></tr>
+            <tr><td>I₀ normadan yuqori</td><td>Bo'sh yurish sinoví</td><td>Magnit zanjiri havo bo'shliqlarini tekshirish</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="section safety">
+        <div class="section-header">🛑 Xavfsizlik texnikasi</div>
+        <div class="section-body">
+          <div class="safety-box">
+            <div class="safety-title">🚨 SINOV XAVFSIZLIGI</div>
+            <ul>
+              <li>Bo'sh yurish sinovida dvigatель aylanayotganda <strong>muft, kasnak yoki havorozatgichga qo'l tekkizish** taqiqlanadi.</li>
+              <li>Megaommetr bilan o'lchashda chulg'am terminallari yerdan <strong>to'liq uzilgan** bo'lishi shart.</li>
+              <li>Generator sinov stendida sinovdan o'tkazilganda <strong>o'ragan to'siq** o'rnatiladi.</li>
+              <li>щётka-kollektör apparatini tiklantirgan dvigatellda bo'sh yurish sinovi vaqtida <strong>щётка qutisidan elektr uchqun** chiqishi kuzatiladi — bu normal, lekin yaqin turmaslik kerak.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+  <!-- ═══════════════════════════════════════════ MAVZU 27 ═══ -->
+  <details id="t27">
+    <summary>
+      <div class="topic-num">27</div>
+      <div class="topic-title">Elektr mashinani ishga tushirish, yuklamasini va haroratini nazorat qilish</div>
+      <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    </summary>
+    <div class="content">
+
+      <div class="section annot">
+        <div class="section-header">📌 Annotatsiya</div>
+        <div class="section-body">
+          <p>Elektr mashinani to'g'ri ishga tushirish — muammosiz, uzluksiz ishlashning asosi. Ishga tushirish jarayonida katta ishga tushirish toklari paydo bo'ladi, mexanik stresslar yuzaga keladi. Bundan tashqari, doimiy nazorat — harorat va yuklanishni kuzatish — mashinaning uzoq muddatli ishonchli ishlashini ta'minlaydi.</p>
+        </div>
+      </div>
+
+      <div class="section theory">
+        <div class="section-header">📚 Nazariy asoslar</div>
+        <div class="section-body">
+          <h3>Ishga tushirish usullari</h3>
+          <table>
+            <tr><th>Usul</th><th>Tavsif</th><th>Ishga tushirish toki</th><th>Qo'llanish sohasi</th></tr>
+            <tr><td>To'g'ridan-to'g'ri (DOL)</td><td>To'liq kuchlanish bevosita beriladi</td><td>I<sub>st</sub> = 5–7 × I<sub>n</sub></td><td>P ≤ 7,5 kW, mustahkam tarmoq</td></tr>
+            <tr><td>Yulduzcha–uchburchak (Y/Δ)</td><td>Ishga tushirishda Y, keyin Δ</td><td>I<sub>st</sub> = 1/3 × DOL</td><td>P > 15 kW, yengil yuk</td></tr>
+            <tr><td>Avtotransformator bilan</td><td>Kamaytrilgan kuchlanish beriladi</td><td>I<sub>st</sub> = k² × DOL toki</td><td>Og'ir mexanizmlar</td></tr>
+            <tr><td>Stator rezistori orqali</td><td>Ketma-ket rezistor qo'shiladi</td><td>I<sub>st</sub> = ~3–4 × I<sub>n</sub></td><td>O'rta quvvatli dvigatlellar</td></tr>
+            <tr><td>Chastota o'zgartiruvchi (VFD)</td><td>Sekin-asta chastota va kuchlanish oshiriladi</td><td>I<sub>st</sub> ≈ I<sub>n</sub></td><td>Zamonaviy yuqori samarali yechim</td></tr>
+          </table>
+
+          <h3>Ishga tushirish momenti talablari</h3>
+          <span class="formula">M_st ≥ k × M_n  (k = 1,2 ÷ 2,5 yukka qarab)</span>
+
+          <h3>Yuklanishni nazorat qilish</h3>
+          <ul>
+            <li><strong>Ammeter ko'rsatishi:</strong> I ≤ I<sub>n</sub> bo'lishi kerak; qisqa muddatli ortiqcha yuklanish ruxsat etiladi</li>
+            <li><strong>Yuklanish koeffitsienti:</strong> β = I/I<sub>n</sub>; optimal β = 0,8–1,0</li>
+            <li><strong>Aktiv quvvat:</strong> P = √3 × U × I × cosφ; wattmetr bilan o'lchanadi</li>
+          </ul>
+
+          <h3>Haroratni nazorat qilish</h3>
+          <p>Dvigatель harorati uch usulda nazorat qilinadi:</p>
+          <ul>
+            <li><strong>Chulg'amga o'rnatilgan termistor (PTC):</strong> Harorat o'skanda qarshilik keskin oshadi → relé ishga tushadi</li>
+            <li><strong>Termoporist (PT100, Pt1000):</strong> Aniq harorat qiymatini berada → ДС (DCS) ga uzatiladi</li>
+            <tr><td>Ko'rgazmali nazorat:</td> kuzatuv qalqonida infrachiziqli termometr yoki termovisor bilan</li>
+          </ul>
+
+          <div class="warn-box">Chulg'am haroratini izolyatsiya sinfiga mos ravishda nazorat qilish: B sinf — 130°C, F sinf — 155°C dan oshmasligi kerak. Oshsa — darhol to'xtatish!</div>
+        </div>
+      </div>
+
+      <div class="section pract">
+        <div class="section-header">🛠 Ishga tushirish algoritmi (DOL usul)</div>
+        <div class="section-body">
+          <ol class="steps">
+            <li><strong>Dastlabki tekshiruv:</strong> Mexanik to'siqlar yo'qligi, moy bosimi (yog'lanuvchi tizim bo'lsa), sovutish tizimi ishlashi.</li>
+            <li><strong>Kuchlanish berish:</strong> Magistral uzgich yopiladi, kontaktor yoki yurgizuvchi yopiladi.</li>
+            <li><strong>Ishga tushirish jarayonini kuzatish:</strong> Ammeter → ток tushishi (I → I<sub>n</sub>) kuzatiladi; 5–15 soniyada nominal tezlikka yetadi.</li>
+            <li><strong>Yuklanishni berish:</strong> Texnologik jarayon bo'yicha asta-sekin yuk beriladi.</li>
+            <li><strong>Nazorat o'lchovlari:</strong> I, U, P, cos φ, n, T° qayd etiladi; operativ jurnalga kiritiladi.</li>
+            <li><strong>Haroratni kuzatish:</strong> Ishga tushirish tokidan keyin harorat o'sishini bir soat kuzatish.</li>
+          </ol>
+
+          <h3>Y/Δ ishga tushirish algoritmi</h3>
+          <ol class="steps">
+            <li>Stator chulg'ami Y ulash bilan kuchlanish beriladi (kuchlanish pasayadi).</li>
+            <li>Dvigatель nominal tezligining 70–80%iga yetganda (2–5 soniya).</li>
+            <li>Taymer signalida Y uziladi, Δ ulanadi (shu tartib avtomatik kontaktorlar bilan).</li>
+            <li>Nominal tezlik va yuklanishni nazorat qilish.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="section fault">
+        <div class="section-header">⚠️ Ishga tushirish va ishlash nosozliklari</div>
+        <div class="section-body">
+          <table>
+            <tr><th>Holat</th><th>Belgi</th><th>Sababi</th><th>Choralar</th></tr>
+            <tr><td>Ishga tushmaydi</td><td>Tok yo'q yoki juda past</td><td>Kuchlanish yo'q, faza uzilgan</td><td>Elektr ta'minot tekshirish</td></tr>
+            <tr><td>Sekin aylanadi</td><td>n &lt; n<sub>n</sub>, tok ortiq</td><td>Yuk juda og'ir, kuchlanish past</td><td>Yuk kamaytirish, kuchlanish tekshirish</td></tr>
+            <tr><td>Tez isiydi</td><td>Harorat > norma</td><td>Ortiqcha yuk, ventilatsiya yo'qligi</td><td>Yuk kamaytirish, tozalash</td></tr>
+            <tr><td>Y/Δ o'tishda tok saltanaşı</td><td>O'tish paytida tok impulsi</td><td>O'tish vaqti noto'g'ri (juda erta)</td><td>Taymer vaqtini +0,5s oshirish</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="section safety">
+        <div class="section-header">🛑 Xavfsizlik texnikasi</div>
+        <div class="section-body">
+          <div class="safety-box">
+            <div class="safety-title">🚨 ISHGA TUSHIRISH XAVFSIZLIGI</div>
+            <ul>
+              <li>Ishga tushirish tugmasini bosishdan oldin <strong>barcha xodimlar dvigatelldan uzoqlashgani</strong> tekshirilsin.</li>
+              <li>Avtomatik qayta ishga tushirish (APV) tizimi bo'lsa — <strong>dvigatell yaqinida ishlash taqiqlanadi</strong> (to'satdan ishga tushish mumkin).</li>
+              <li>Harorat normadan oshganda <strong>avtomatik o'chirish** ishlamaasa, qo'lda to'xtatish majburiy.</li>
+              <li>Ishga tushirish apparaturasi (kontaktor paneli) oldida <strong>dielektrik gilamcha</strong> yotishi kerak.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+  <!-- ═══════════════════════════════════════════ MAVZU 28 ═══ -->
+  <details id="t28">
+    <summary>
+      <div class="topic-num">28</div>
+      <div class="topic-title">Elektr mashinaning chulg'ami izolyatsiyasini quritish, tok yig'uvchi qurilma va podshipniklarni ishlatish</div>
+      <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    </summary>
+    <div class="content">
+
+      <div class="section annot">
+        <div class="section-header">📌 Annotatsiya</div>
+        <div class="section-body">
+          <p>Elektr mashinalarining to'g'ri ishlashi uchun chulg'am izolyatsiyasining yaxshi holatda bo'lishi, tok yig'uvchi qurilmaning (щётka-kollektor yoki щётka-hal'qa) va podshipniklarning to'g'ri ishlatilishi hal qiluvchi ahamiyatga ega.</p>
+        </div>
+      </div>
+
+      <div class="section theory">
+        <div class="section-header">📚 Nazariy asoslar</div>
+        <div class="section-body">
+          <h3>Chulg'am izolyatsiyasi — tarkibi va sinflanishi</h3>
+          <p>Elektr mashina chulg'ami izolyatsiyasi uch qatlamdan iborat:</p>
+          <ul>
+            <li><strong>O'tkazgich izolyatsiyasi</strong> — mis sim ustidagi emalь (MX-90, PE-939 va boshqalar)</li>
+            <li><strong>Qatlam izolyatsiyasi</strong> — o'tkazgichlar orasidagi izolyatsion qog'oz yoki lenta</li>
+            <tr><td><strong>Gazlar izolyatsiyasi</strong></td><td>Pazlar (шлиц) va idish orasidagi izolyatsion gil'zalar</td></tr>
+          </ul>
+
+          <h3>Izolyatsiyaning yomonlashishi sabablari</h3>
+          <ol>
+            <li>Namlanish — R<sub>iz</sub> ni keskin pasaytiradi</li>
+            <li>Issiqlik qarishi — emaль qattig'lashadi va yoriladi</li>
+            <li>Mexanik shikast — tashqi ta'sir, titrash, rezonansi</li>
+            <li>Elektr ta'sir — ortiqcha kuchlanish impulslari (surglar)</li>
+          </ol>
+
+          <h3>Tok yig'uvchi qurilma — щётka-kollektor/halqa</h3>
+          <p><strong>Kollektor</strong> (to'g'rilagichlarda) — mis plastinkalardan tashkil topgan silindrsimon qurilma. <strong>Halqalar</strong> (sinxron mashinalarda va halqali rotorli asinxronlarda) — kolektordan farqli ravishda to'g'rilanmaydi, to'lqinli tok o'tkazadi.</p>
+
+          <h4>щётka turlari va qo'llanishi</h4>
+          <table>
+            <tr><th>щётка turi</th><th>Belgisi</th><th>Tok zichligi</th><th>Qo'llanishi</th></tr>
+            <tr><td>Elektrografitli</td><td>EG, EG-4</td><td>8–12 A/sm²</td><td>Universal</td></tr>
+            <tr><td>Mis-grafitli</td><td>MGS, MGS-7</td><td>20–30 A/sm²</td><td>Kichik kuchlanishli generatorlar</td></tr>
+            <tr><td>Grafit</td><td>G, G-3</td><td>5–8 A/sm²</td><td>Halqalar, yuqori tezlikli</td></tr>
+          </table>
+
+          <h3>Podshipniklar — turlari va qo'llanishi</h3>
+          <table>
+            <tr><th>Tur</th><th>Tavsif</th><th>Qo'llanishi</th></tr>
+            <tr><td>Shar podshipnik</td><td>Radial va osiy yuklanish, yuqori tezlik</td><td>Kichik va o'rta dvigatlellar</td></tr>
+            <tr><td>Rolik podshipnik</td><td>Katta radial yuklanish</td><td>Katta dvigatlellar, kompressorlar</td></tr>
+            <tr><td>Ko'ndalang rolik podshipnik</td><td>Katta osiy va radial bir vaqtda</td><td>Reduktorlar, og'ir mexanizmlar</td></tr>
+            <tr><td>Sirpanish podshipnik</td><td>Katta dvigatelllar, yuqori yuk</td><td>P > 200 kW dvigatelllar</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="section pract">
+        <div class="section-header">🛠 Amaliy jarayonlar</div>
+        <div class="section-body">
+          <h3>A. Chulg'am izolyatsiyasini quritish bosqichlari</h3>
+          <ol class="steps">
+            <li><strong>Namlashning darajasini aniqlash:</strong> Megaommetr bilan R<sub>iz</sub> o'lchash; absorptsiya koeff k = R₆₀/R₁₅ < 1,3 bo'lsa quritish zarur.</li>
+            <li><strong>Quritish usulini tanlash:</strong> Kichik dvigatellar → infrachiziqli lamba; O'rta → qisqa tutashuv usul; Katta → pechda quritish.</li>
+            <li><strong>Quritish jarayoni:</strong> Harorat asta-sekin (1–2°C/daqiqa) oshiriladi; max = 80°C (B sinf uchun); ichki havo sirkulyatsiyasi ta'minlanadi.</li>
+            <li><strong>Nazorat:</strong> Har 30 daqiqada R<sub>iz</sub> o'lchanadi va grafikka tushiriladi; R stabillashan va 3 soat barqaror bo'lganda — quritish tugatiladi.</li>
+          </ol>
+
+          <h3>B. щётka-kollektor apparatini parvarishlash</h3>
+          <ol class="steps">
+            <li><strong>Kollektor yuzasini tekshirish:</strong> Rang (qo'ng'ir patina — normal, qoralik — nosog'lom), yuzadagi silliqlik, plastinkalar orasidagi bo'shliq (0,8–1,2 mm).</li>
+            <li><strong>Kollektor yuzasini silliqlash:</strong> Mayda zımpara (80–120 no'mer) bilan mashinasi aylanayotgan holda; keyin vata bilan artish.</li>
+            <li><strong>щётka bosimini tekshirish:</strong> Torsinli balans bilan o'lchash; norma 150–250 g/sm² (щётka turiga qarab).</li>
+            <li><strong>щётka holati:</strong> Yeyilish chegarasini tekshirish (≤ 1/2 uzunligida almashtirish); щётka qutisidagi bo'shliq 0,1–0,3 mm bo'lishi shart.</li>
+          </ol>
+
+          <h3>C. Podshipniklarni parvarishlash va almashtirish</h3>
+          <ol class="steps">
+            <li><strong>Yog'lash:</strong> LGMT-3, Litol-24 yoki boshqa ruxsat etilgan smar-material; miqdorni belgilangan hajmda to'ldirish (kamera hajmining 1/3–2/3).</li>
+            <li><strong>Podshipnikni almashtirish:</strong> Press bilan siqib chiqarish; yangi podshipnikni induktiv qizdiruvchi yoki press bilan o'rnatish; qo'l bilan urib kiritish taqiqlanadi.</li>
+            <li><strong>Podshipnik haroratini nazorat:</strong> Issiqlik termometri yoki termoporist bilan; norma: ambient + 40°C dan oshmasin.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="section fault">
+        <div class="section-header">⚠️ Nosozliklar</div>
+        <div class="section-body">
+          <table>
+            <tr><th>Nosozlik</th><th>Belgi</th><th>Sababi</th><th>Bartaraf etish</th></tr>
+            <tr><td>Kolektorda yonish izi</td><td>Qorayish, uchqun</td><td>щётka bosimi noto'g'ri, kontaminatsiya</td><td>Tozalash, bosimni sozlash</td></tr>
+            <tr><td>Podshipnik issiqlashi</td><td>Harorat &gt; norma</td><td>Oz yog', yog' eskirgan, yuklanish ortiq</td><td>Yog' almashtirish, yuklanish tekshirish</td></tr>
+            <tr><td>Podshipnik shovqini</td><td>Metall g'ichirlag'i</td><td>Sharlar yeyilgan, toza emas</td><td>Almashtirish</td></tr>
+            <tr><td>Past R<sub>iz</sub></td><td>Megaommetr ko'rsatishi past</td><td>Nam, chulg'am qarigan</td><td>Quritish, ta'mirlash</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="section safety">
+        <div class="section-header">🛑 Xavfsizlik texnikasi</div>
+        <div class="section-body">
+          <div class="safety-box">
+            <div class="safety-title">🚨 XAVFSIZLIK TALABLARI</div>
+            <ul>
+              <li>Kollektor apparatini ishlayotgan mashina ustida tozalashda faqat <strong>izolyatsiyalangan dasta</strong>li vata va cho'tka ishlatiladi.</li>
+              <li>Quritish jarayonida dvigatelni <strong>nazorat qilmasdan qoldirish taqiqlanadi</strong> — harorat ko'tarilishi bo'lishi mumkin.</li>
+              <li>Podshipnikni induktiv usulda qizdirish: harorat <strong>120°C dan oshmaslik</strong> kerak; qo'l bilan tekkizish taqiqlanadi.</li>
+              <li>Yog'lash uchun ishlatiladigan materiallar <strong>xona haroratida** saqlansa ham shprisni issiqdan uzoqda ushlab turish kerak — bosim ortsa portlaydi.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+  <!-- ═══════════════════════════════════════════ MAVZU 29 ═══ -->
+  <details id="t29">
+    <summary>
+      <div class="topic-num">29</div>
+      <div class="topic-title">Mashinani ishlatish jarayonida vujudga keladigan nosozliklar va ularni bartaraf etish, ishlatilayotgan mashinaga texnik xizmat ko'rsatish</div>
+      <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    </summary>
+    <div class="content">
+
+      <div class="section annot">
+        <div class="section-header">📌 Annotatsiya</div>
+        <div class="section-body">
+          <p>Ishlab turgan elektr mashinaning texnik holatini doimiy kuzatish va yuzaga kelgan nosozliklarni o'z vaqtida bartaraf etish — ishlab chiqarish texnologiyasining uzluksizligini ta'minlaydi. Texnik xizmat ko'rsatish profilaktik chora sifatida nosozliklarning oldini oladi.</p>
+        </div>
+      </div>
+
+      <div class="section theory">
+        <div class="section-header">📚 Nosozliklarning tasniflari va sabablari</div>
+        <div class="section-body">
+          <h3>Nosozliklar tasnifi</h3>
+          <table>
+            <tr><th>Toifasi</th><th>Tavsif</th><th>Misollar</th></tr>
+            <tr><td>Elektr nosozliklari</td><td>Chulg'amlar, izolyatsiya, kontaktlar</td><td>Qisqa tutashuv, yerga ulash, izolyatsiya yetishmovchiligi</td></tr>
+            <tr><td>Mexanik nosozliklar</td><td>Aylanuvchi va harakatlanuvchi qismlar</td><td>Podshipnik yeyilishi, o'q egriligi, muft shikasti</td></tr>
+            <tr><td>Magnit nosozliklar</td><td>Magnit zanjiri buzilishi</td><td>Plastinka yopishishi, havo bo'shliqlarining o'zgarishi</td></tr>
+            <tr><td>Texnologik nosozliklar</td><td>Tashqi sabablar</td><td>Kuchlanish tebranishi, yuklanish beqarorligi</td></tr>
+          </table>
+
+          <h3>Eng ko'p uchraydigan nosozliklar va sabablari</h3>
+          <table>
+            <tr><th>Nosozlik</th><th>Yuzaga kelish sababi</th><th>Oqibati</th></tr>
+            <tr><td>Stator chulg'amida qisqa tutashuv</td><td>Izolyatsiya yoshi, mexanik shikast, ortiqcha kuchlanish</td><td>Ortiqcha tok, issiqlash, dvigatell to'xtashi</td></tr>
+            <tr><td>Bir fazaning uzilishi</td><td>Simlarda uzilish, kontaktor nosozligi</td><td>Ikki fazada ishlash, katta tok, issiqlash</td></tr>
+            <tr><td>Kuchlanish assimetryasi</td><td>Tarmoqda nosimmetrik yuk</td><td>Ortiqcha yo'qotish, issiqlash</td></tr>
+            <tr><td>Podshipniklar yeyilishi</td><td>Yog'lanish yo'qligi, kontaminatsiya, ortiqcha yuk</td><td>Titrash, shovqin, rotor qopqoqqa tegishi</td></tr>
+            <tr><td>Rotor qopqoqqa tegishi</td><td>Podshipnik o'ynoqi, rotor o'q egriligi</td><td>G'ichirlab, metal ovozi, dvigatell bloklanishi</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="section pract">
+        <div class="section-header">🛠 Texnik xizmat ko'rsatish tartibi (TO)</div>
+        <div class="section-body">
+          <h3>Kunlik tekshiruv (TO-1)</h3>
+          <ol class="steps">
+            <li>Vizual ko'rikki: dvigatelning tashqi ko'rinishi, hiqillow yoki g'ayrioddiy ovozlar yo'qligi.</li>
+            <li>Harorat nazorati: termomoqlama yoki termovisor bilan.</li>
+            <li>Tok va kuchlanish ko'rsatmalari: ammeter/voltmetrdan o'qish, jurnalga kiritish.</li>
+            <li>Titrash darajasini eshitib tekshirish.</li>
+          </ol>
+
+          <h3>Haftalik texnik xizmat (TO-2)</h3>
+          <ol class="steps">
+            <li>Sovutish tizimini tekshirish: havorozatgich ishlashi, havo yo'llarining tozaligi.</li>
+            <li>Kontrol asboblar ko'rsatmalarini tahlil qilish.</li>
+            <li>щётka qismini tekshirish: yeyilish, bosim, kollektor yuza holati.</li>
+          </ol>
+
+          <h3>Oylik texnik xizmat (TO-3)</h3>
+          <ol class="steps">
+            <li>Dvigatel kuzovini siqilgan havo bilan tozalash.</li>
+            <li>Podshipnik yog'i miqdorini tekshirish (zarur bo'lsa to'ldirish).</li>
+            <li>Barcha elektr ulash nuqtalarini vizual tekshirish.</li>
+            <li>Dvigatell asosini va muft holatini tekshirish.</li>
+            <li>Yerga ulash zanjiri qarshiligini o'lchash.</li>
+          </ol>
+
+          <h3>Nosozlik diagnostikasi tartibi</h3>
+          <ol class="steps">
+            <li>Nosozlik belgilarini aniqlash va tavsiflash.</li>
+            <li>Elektr va mexanik sabablarni ajratish.</li>
+            <li>Mos asboblar bilan o'lchov o'tkazish (megaommetr, tachometr, vibr-o'lchagich).</li>
+            <li>Nosozlik manbayini aniqlash.</li>
+            <li>Bartaraf etish rejasini tuzish.</li>
+            <li>Bartaraf etish ishlarini o'tkazish va sinov.</li>
+            <li>Hujjatlashtirish: defektatsiya akti, ta'mirlash protokoli.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="section fault">
+        <div class="section-header">⚠️ Nosozliklar jadvali — keng tavsif</div>
+        <div class="section-body">
+          <table>
+            <tr><th>Nosozlik</th><th>Ko'rinadigan belgi</th><th>Sinov natijalari</th><th>Bartaraf etish usuli</th></tr>
+            <tr><td>Navbatlar arасidа qisqa tutashuv</td><td>Tok ortadi, mahalliy issiqlash</td><td>Fazalar orasida R teng emas</td><td>Kapital ta'mirlash, chulg'am yig'ish</td></tr>
+            <tr><td>Fazalararo qisqa tutashuv</td><td>Kuchli tok, KZ himoyasi ishlaydi</td><td>Fazalar orasida R = 0</td><td>Kapital ta'mirlash</td></tr>
+            <tr><td>Yerga ulash</td><td>FZA yoki differentsial himoya ishlaydi</td><td>R<sub>iz</sub> → 0</td><td>Izolyatsiyani tiklash, ta'mirlash</td></tr>
+            <tr><td>Ortiqcha titrash</td><td>Titrash seziladi</td><td>Vibr-o'lchagich → norma oshgан</td><td>Muvozanatlash, podshipnik almashtirish</td></tr>
+            <tr><td>Kuchli shovqin</td><td>Metal ovozi, g'ichirlaw</td><td>Akustik o'lchov</td><td>Podshipnik tekshiruvi, bo'shliq nazorati</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="section safety">
+        <div class="section-header">🛑 Xavfsizlik texnikasi</div>
+        <div class="section-body">
+          <div class="safety-box">
+            <div class="safety-title">🚨 TEXNIK XIZMAT XAVFSIZLIGI</div>
+            <ul>
+              <li>Ishlayotgan dvigatelni <strong>yuvish, artish</strong> faqat izolyatsiyalangan asboblar bilan amalga oshirilsin.</li>
+              <li>Titrash yoki g'ayrioddiy ovoz aniqlanganda <strong>darhol to'xtatib tekshirish</strong> kerak — keyingi ishlash katta avariyaga olib kelishi mumkin.</li>
+              <li>Texnik xizmat vaqtida dvigatel to'xtatilmasa — <strong>aylanuvchi qismlar yaqinida ishlash taqiqlanadi</strong>.</li>
+              <li>Nosozliklar jurnalini to'g'ri yuritish <strong>huquqiy javobgarlikni** kamaytiradI va texnik tarixni saqlaydi.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+  <!-- ═══════════════════════════════════════════ MAVZU 30 ═══ -->
+  <details id="t30">
+    <summary>
+      <div class="topic-num">30</div>
+      <div class="topic-title">Kuchlanishi 1000 V gacha bo'lgan tarqatish qurilmalaridagi yurgizish</div>
+      <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    </summary>
+    <div class="content">
+
+      <div class="section annot">
+        <div class="section-header">📌 Annotatsiya</div>
+        <div class="section-body">
+          <p>U ≤ 1000 V li tarqatish qurilmalari (TQ) — sanoat korxonalari, turar-joy binolari va kommunal ob'ektlardagi elektr ta'minotining asosiy infratuzilmasini tashkil etadi. Ulardagi yurgizish apparatlari (kontaktorlar, avtomatik uzgichlar, magnit yurgizgichlar) dvigatellarni va boshqa iste'molchilarni boshqaradi.</p>
+        </div>
+      </div>
+
+      <div class="section theory">
+        <div class="section-header">📚 Nazariy asoslar</div>
+        <div class="section-body">
+          <h3>Tarqatish qurilmasi (TQ) tarkibi</h3>
+          <ul>
+            <li><strong>Kiruvchi panel:</strong> Asosiy avtomatik uzgich (ACB yoki MCCB), tok o'lchagich transformatorlar</li>
+            <li><strong>Tarqatish sektsiyalari:</strong> Modulli avtomatlar (MCB), kontaktorlar, quvvat shinalari</li>
+            <li><strong>Nazorat paneli:</strong> Voltmetr, ammeter, chastotomer, PLC yoki releli nazorat tizimi</li>
+            <li><strong>Himoya apparatlari:</strong> Differentsial relé (RCD/RCBO), term-magnit relé, ZNZ</li>
+          </ul>
+
+          <h3>Yurgizish apparatlari</h3>
+          <table>
+            <tr><th>Apparat</th><th>Vazifasi</th><th>Tok diapazoni</th></tr>
+            <tr><td>Magnit yurgizgich (МП)</td><td>Dvigatel ishga tushirish va to'xtatish</td><td>6,3 – 640 A</td></tr>
+            <tr><td>Kontaktor</td><td>Kuchlanish yoki tok ostida ulanish/uzish</td><td>6 – 4000 A</td></tr>
+            <tr><td>Avtomatik uzgich (АВ)</td><td>Normal va avariya holatida uzish</td><td>0,5 – 6300 A</td></tr>
+            <tr><td>Paqir uzgich (рубильник)</td><td>Faqat tok yo'q holatda uzish/ulash</td><td>25 – 1000 A</td></tr>
+            <tr><td>Paket uzgich (ПКВ)</td><td>Aylanish yo'nalishini o'zgartirish</td><td>До 60 A</td></tr>
+          </table>
+
+          <h3>Magnit yurgizgich — ishlash prinsipi</h3>
+          <p>Elektromagnit kuchlanish (110, 220 yoki 380 V AC) berilganda solenoid magnit maydon hosil qiladi, yog'ach (якорь) tortiladi va bosh kontaktlar yopiladi. Kuchlanish olinsa — yay kuchida kontaktlar ochiladi.</p>
+          <span class="formula">F_mag = B² × S / (2μ₀)   ;   F_spring < F_mag (yopiq holatda)</span>
+
+          <h3>Tartibli va qayta ishga tushirish tizimi (AПВ)</h3>
+          <ul>
+            <li><strong>AПВ (Avtomatik qayta ulash):</strong> Qisqa muddatli nosozlikdan keyin yurgizgichni avtomatik qayta ishga tushiradi</li>
+            <li><strong>AVR (Avtomatik zahira yuklanishi):</strong> Asosiy ta'minotdan zaxira ta'minotga o'tish</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="section pract">
+        <div class="section-header">🛠 Yurgizish amaliy bo'limlar</div>
+        <div class="section-body">
+          <h3>Magnit yurgizgichni o'rnatish algoritmi</h3>
+          <ol class="steps">
+            <li><strong>Tanlash:</strong> Dvigatel nominal toki bo'yicha magnit yurgizgich toifasi (I<sub>MП</sub> ≥ I<sub>n</sub> × 1,1) va toifasi IEC / GOST bo'yicha.</li>
+            <li><strong>Montaj:</strong> DIN-reyкaga yoki bolt bilan mahkamlash; nominal vertikal holat (±5°).</li>
+            <li><strong>Ulash:</strong> Kuch zanjirlari (L1, L2, L3 → T1, T2, T3); boshqaruv zanjiri (A1, A2 — solenoid, 13,14 — yordamchi kontaktlar).</li>
+            <li><strong>Term-magnit releni sozlash:</strong> I<sub>rel</sub> = I<sub>n</sub> × 1,0–1,25 oralig'ida sozlash.</li>
+            <li><strong>Sinov:</strong> Boshqaruv kuchlanishi berish → kontaktlar yopilishi tekshirish → kuch zanjirini ulash → ishlashni tekshirish.</li>
+          </ol>
+
+          <h3>Avtomatik uzgichni sozlash</h3>
+          <ol class="steps">
+            <li><strong>Nominal tok (In) ni belgilash:</strong> Kabel kesimiga va iste'molchi toiga mos.</li>
+            <li><strong>Term uzish toʻsiq sozi (Ir):</strong> Odatda 0,7–1,0 × I<sub>n</sub>.</li>
+            <li><strong>Magnit uzish toki sozi (Isd):</strong> Dvigatellar uchun 8–12 × I<sub>n</sub> (ishga tushirish tokini o'tkazib yuborish uchun).</li>
+            <li><strong>Seleqtivlik tekshiruvi:</strong> Yuqori (feedeq) va quyi (branch) uzgichlarning trip vaqtlari tanlab o'rnatilishi.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="section fault">
+        <div class="section-header">⚠️ Yurgizish apparatlari nosozliklari</div>
+        <div class="section-body">
+          <table>
+            <tr><th>Nosozlik</th><th>Belgi</th><th>Sababi</th><th>Bartaraf etish</th></tr>
+            <tr><td>Magnit yurgizgich gurrillaydi</td><td>Past chastotali shovqin</td><td>Yog'och yuzasi kir, kuchlanish past</td><td>Yog'och yuzasini tozalash, kuchlanishni tekshirish</td></tr>
+            <tr><td>Kontaktlar yopilmaydi</td><td>Tok yo'q</td><td>Boshqaruv kuchlanishi yo'q, solenoid nosoz</td><td>Zanjir tekshirish, solenoid almashtirish</td></tr>
+            <tr><td>Kontaktlar qizib ketadi</td><td>Qo'rqinch issiqlash</td><td>Kuchlanish yoki yeyilgan kontaktlar</td><td>Kontaktlarni tozalash yoki almashtirish</td></tr>
+            <tr><td>AVt uzgich tez trip qiladi</td><td>Toʻsiq qiymatida uzilish</td><td>Sozlash noto'g'ri, KZ mavjud</td><td>Sozlashni tekshirish, zanjir tekshirish</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="section safety">
+        <div class="section-header">🛑 Xavfsizlik texnikasi</div>
+        <div class="section-body">
+          <div class="safety-box">
+            <div class="safety-title">🚨 TQ VA YURGIZISH XAVFSIZLIGI</div>
+            <ul>
+              <li>TQ panellarida ishlash faqat <strong>tegishli yo'riqnomasi va guruhga ega</strong> xodim tomonidan bajariladi.</li>
+              <li>Panel ichida ishlashda <strong>kuchlanish tahlilchisi</strong> bilan barcha to'siqlar de-energizatsiya qilingani tekshirilsin.</li>
+              <li>Kontaktlarni tozalash faqat <strong>de-energizatsiya qilinganidan</strong> keyin amalga oshiriladi.</li>
+              <li>Avtomatik uzgich tripidan keyin sababni aniqlamay <strong>qayta yopish taqiqlanadi</strong> — KZ bo'lishi mumkin.</li>
+              <li>Barcha kabel ulash terminallari <strong>izolyatsiyalangan** bo'lishi; yalang'och o'tkazgich qoldirilmasligi shart.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+  <!-- ═══════════════════════════════════════════ MAVZU 31 ═══ -->
+  <details id="t31">
+    <summary>
+      <div class="topic-num">31</div>
+      <div class="topic-title">Kuchlanishi 1000 V gacha bo'lgan tarqatish qurilmalaridagi yurgizish, himoya qilish va rostlash</div>
+      <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    </summary>
+    <div class="content">
+
+      <div class="section annot">
+        <div class="section-header">📌 Annotatsiya</div>
+        <div class="section-body">
+          <p>U ≤ 1 kV li TQ'da yurgizish, himoya qilish va rostlash tizimi — birgalikda elektr jihozlarning xavfsiz, samarali va uzoq muddatli ishlashini ta'minlaydi. Ushbu mavzuda yurgizish va himoya apparatlarining o'zaro bog'liqligi, seleqtivlik printsipi va amaliy sozlash usullari ko'rib chiqiladi.</p>
+        </div>
+      </div>
+
+      <div class="section theory">
+        <div class="section-header">📚 Nazariy asoslar</div>
+        <div class="section-body">
+          <h3>Himoya tizimining tuzilmasi</h3>
+          <p>U ≤ 1 kV li tarmoqda himoya tizimi ierarxik tuzilishga ega:</p>
+          <ul>
+            <li><strong>I daraja:</strong> Kiruvchi avtomatik uzgich (ACB) — butun tarmoqni himoyalaydi</li>
+            <li><strong>II daraja:</strong> Liniya avtomatlari (MCCB) — yo'nalishlar bo'yicha</li>
+            <li><strong>III daraja:</strong> Modulli avtomatlar (MCB) + RCD — oxirgi iste'molchi himoyasi</li>
+          </ul>
+
+          <h3>Seleqtivlik printsipi</h3>
+          <p>Seleqtivlik — faqat nosoz uchastkaning himoyasini ishga tushirish; qolgan qism ishlashda davom etadi.</p>
+          <table>
+            <tr><th>Seleqtivlik turi</th><th>Printsipi</th><th>Qo'llanishi</th></tr>
+            <tr><td>Vaqt seleqtivligi</td><td>Quyi daraja tezroq trip qiladi</td><td>Universal, oddiy</td></tr>
+            <tr><td>Tok seleqtivligi</td><td>Quyi daraja pastroq tokda trip qiladi</td><td>Qisqa liniyalarda</td></tr>
+            <tr><td>Zona seleqtivligi (ZSI)</td><td>Aqlli aloqa, faqat eng yaqin himoya trip qiladi</td><td>Zamonaviy elektron uzgichlarda</td></tr>
+            <tr><td>Energetik seleqtivlik</td><td>Quyi daraja tripida yuqori darajaning energiyasi cheklangan</td><td>Kaskad ulash</td></tr>
+          </table>
+
+          <h3>Differentsial relé (RCD) — ishlash printsipi</h3>
+          <span class="formula">I_diff = I_L1 + I_L2 + I_L3 + I_N → Trip agar I_diff > I_Δn</span>
+          <p>Toroidal transformator orqali barcha fazalar va neytral o'tkaziladi. Yerga oqim chiqsa — summa noldan farqlanadi → relé ishga tushadi.</p>
+          <table>
+            <tr><th>I<sub>Δn</sub>, mA</th><th>Qo'llanishi</th></tr>
+            <tr><td>10 mA</td><td>Vannaxona, hovuz (elektr urishi himoyasi)</td></tr>
+            <tr><td>30 mA</td><td>Uy va sanoat iste'molchilari (standart)</td></tr>
+            <tr><td>100 mA</td><td>Kabel liniyalari (yong'in himoyasi)</td></tr>
+            <tr><td>300–500 mA</td><td>Kiruvchi RCD (seleqtiv)</td></tr>
+          </table>
+
+          <h3>Rostlash tizimi (regulyatsiya)</h3>
+          <ul>
+            <li><strong>Kuchlanish regulyatоri (AVR):</strong> Kuchlanishni belgilangan qiymatda saqlovchi qurilma</li>
+            <li><strong>Chastota regulyatori (VFD/FC):</strong> Dvigatel tezligini uzluksiz boshqarish</li>
+            <li><strong>Reaktiv quvvat kompensatori (KRM):</strong> cosφ ni 0,9–0,95 da saqlash uchun kondensator batareyalari</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="section pract">
+        <div class="section-header">🛠 Amaliy: Himoya tizimini sozlash</div>
+        <div class="section-body">
+          <h3>Avtomatik uzgichni sozlash algoritmi</h3>
+          <ol class="steps">
+            <li><strong>Himoya ob'ektini tahlil qilish:</strong> Qaysi simlar, dvigatellar, zanjirlar himoyalanadi?</li>
+            <li><strong>Nominal tok (I<sub>n</sub>) ni aniqlash:</strong> Kabel bo'yicha: <code>I_n ≤ I_dop_kabel</code>; iste'molchi bo'yicha: <code>I_n ≥ I_iste'molchi</code>.</li>
+            <li><strong>Term uzish sozi (I<sub>r</sub>) ni belgilash:</strong> Uzоq muddatli ortiqcha yuklanishdan himoya: I<sub>r</sub> = 1,0–1,2 × I<sub>n</sub>.</li>
+            <li><strong>Magnit uzish sozi (I<sub>sd</sub>) ni belgilash:</strong> Dvigatel: I<sub>sd</sub> = 8–12 × I<sub>n</sub>; kabel: I<sub>sd</sub> = 3–5 × I<sub>n</sub>.</li>
+            <li><strong>Seleqtivlik tekshiruvi:</strong> Koordinatsiya jadvallaridan foydalanish yoki SimPro/ETAP kabi dasturlarda modellash.</li>
+            <li><strong>Sozlash parametrlarini qayd etish:</strong> Hujjatlashtirish.</li>
+          </ol>
+
+          <h3>RCD tanlash va o'rnatish</h3>
+          <ol class="steps">
+            <li><strong>Sinf tanlash:</strong> AC (faqat alternativ oqim), A (alternativ + pulsatsiyali to'g'rilangan), B (barcha turlar — VFD bilan).</li>
+            <li><strong>Trip toki tanlash:</strong> Maqsadga ko'ra yuqoridagi jadvaldan.</li>
+            <li><strong>Trip vaqti tanlash:</strong> Pastasimdagi RCD — tezkor (TT); ustasidagi — selektif (S-tip, 0,1–0,5s).</li>
+            <li><strong>Kabel o'ta oqim xususiyatini hisobga olish:</strong> RCD ni kabel sig'im (kapasitiv) oqimi uchun tuzatish.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="section fault">
+        <div class="section-header">⚠️ Himoya tizimi nosozliklari</div>
+        <div class="section-body">
+          <table>
+            <tr><th>Holat</th><th>Sababi</th><th>Bartaraf etish</th></tr>
+            <tr><td>RCD yolg'on trip qiladi</td><td>Kabel sig'im oqimi katta, elektr shovqini</td><td>Kabel uzunligini qisqartirish, ekranlangan kabel, A-sinf RCD</td></tr>
+            <tr><td>AVt uzgich trip qilmaydi (KZ bo'lsa ham)</td><td>Sozlash oshirib qo'yilgan</td><td>Sozlashni pasaytirish, kabel kesimini kengaytirish</td></tr>
+            <tr><td>Seleqtivlik buzilishi</td><td>Sozlash koordinatsiyalangan emas</td><td>Koordinatsiya hisob-kitobini qayta bajarish</td></tr>
+            <tr><td>VFD da ortiqcha harmoniklar</td><td>Nonlineer yuk</td><td>LC filtr, aktiv filtr qo'shish</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="section safety">
+        <div class="section-header">🛑 Xavfsizlik texnikasi</div>
+        <div class="section-body">
+          <div class="safety-box">
+            <div class="safety-title">🚨 HIMOYA TIZIMI XAVFSIZLIGI</div>
+            <ul>
+              <li>Himoya tizimini <strong>sozlashni o'zboshimchalik bilan o'zgartirish taqiqlanadi</strong> — faqat mas'ul muhandis ruxsati bilan.</li>
+              <li>RCD trip qilganda <strong>sababni aniqlamay qayta ulash taqiqlanadi</strong> — yer qisqa tutashuvi bo'lishi mumkin.</li>
+              <li>Himoya relay sozlamalari <strong>hujjatlashtirilishi** va ma'lum joyda saqlanishi shart.</li>
+              <li>Kuchlanishli panellarda sozlash asboblari <strong>izolatorli dastali** bo'lishi kerak.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+  <!-- ═══════════════════════════════════════════ MAVZU 32 ═══ -->
+  <details id="t32">
+    <summary>
+      <div class="topic-num">32</div>
+      <div class="topic-title">Apparatlarini ishlatish va ta'mirlash</div>
+      <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    </summary>
+    <div class="content">
+
+      <div class="section annot">
+        <div class="section-header">📌 Annotatsiya</div>
+        <div class="section-body">
+          <p>U ≤ 1 kV li tarmoqlardagi elektr apparatlari (kontaktorlar, relé, avtomatik uzgichlar, paket uzgichlar, sigortalar) tegishli ishlatish va ta'mirlash texnologiyasini talab etadi. To'g'ri parvarishlash ularning ishlash muddatini uzaytiradi va elektr ta'minot ishonchliligini ta'minlaydi.</p>
+        </div>
+      </div>
+
+      <div class="section theory">
+        <div class="section-header">📚 Nazariy asoslar — Apparatlar va ularning parametrlari</div>
+        <div class="section-body">
+          <h3>Kontaktor — konstruktsiyasi va parametrlari</h3>
+          <ul>
+            <li><strong>Bosh kontaktlar:</strong> Mis yoki kumush-kadmiy oksidi; ulash-uzish soni ≥ 10⁶ marta</li>
+            <li><strong>Yordamchi kontaktlar:</strong> Boshqaruv zanjirlari uchun; tok ≤ 10 A</li>
+            <li><strong>Elektromagnit magnit tizimi:</strong> Solenoid + yog'och + qaytaruvchi yay</li>
+            <li><strong>Yoy o'chirish kamerasi:</strong> Elektr yoyini o'chirish uchun (magnit puflash yoki deionizatsiya plastinalar)</li>
+          </ul>
+
+          <h3>Avtomatik uzgich tuzilishi</h3>
+          <table>
+            <tr><th>Qism</th><th>Vazifasi</th></tr>
+            <tr><td>Kontaktlar tizimi</td><td>Elektr zanjirini ulash/uzish</td></tr>
+            <tr><td>Termal relé (bimetal plásinka)</td><td>Uzоq muddatli ortiqcha yuklanishdan himoya</td></tr>
+            <tr><td>Magnit relé (solenoid)</td><td>Qisqa tutashuv tokidan tez himoya</td></tr>
+            <tr><td>Trip mexanizmi (zashelka + рычаg)</td><td>Himoya signalida kontaktlarni keskin ochish</td></tr>
+            <tr><td>Yoy o'chirish kamerasi</td><td>Uzganda hosil bo'lgan elektr yoyini o'chirish</td></tr>
+          </table>
+
+          <h3>Elektr yoyi — fizik jarayon</h3>
+          <p>Kontaktlar ochilganda to'yingan bug'larning ionizatsiyasi natijasida elektr yoyi yonadi. Yoyning harorati 5000–10000 K ga yetadi, bu kontaktlar eroziyasiga olib keladi.</p>
+          <span class="formula">W_arc = U_arc × I × t_arc  (J)</span>
+          <div class="warn-box">Katta tok ochilishida elektr yoy kuchli, u kontaktlarni jadal yeyadi va yong'in xavfini oshiradi. Shuning uchun yoy o'chirish tezligi va sifati muhim.</div>
+
+          <h3>Sigortalar — turlari</h3>
+          <table>
+            <tr><th>Tur</th><th>Belgisi</th><th>Ulash energiyasi</th><th>Qo'llanishi</th></tr>
+            <tr><td>Silindrik sigorta</td><td>RT, gg</td><td>Kechiktirilgan</td><td>Kabel himoyasi</td></tr>
+            <tr><td>Nozik simli (tez)</td><td>aM</td><td>Tez</td><td>Yarimo'tkazgichlar himoyasi</td></tr>
+            <tr><td>Noksimon (PN-2)</td><td>PN</td><td>Kechiktirilgan</td><td>Kuch sigorta panellari</td></tr>
+            <tr><td>Saqich (плавкая вставка)</td><td>—</td><td>—</td><td>Yengil liniyalar</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="section pract">
+        <div class="section-header">🛠 Amaliy: Apparatlarni ta'mirlash bosqichlari</div>
+        <div class="section-body">
+          <h3>Kontaktorni joriy ta'mirlash</h3>
+          <ol class="steps">
+            <li><strong>De-energizatsiya:</strong> Kontaktor boshqaruv kuchlanishini o'chirish; kuch kuchlanishini uzish.</li>
+            <li><strong>Kontaktlarni ko'rish:</strong> Yeyilish chuqurligi: ≤ 50% qalinligida almashtirish; yonish va qo'rqinch dog'lar.</li>
+            <li><strong>Kontaktlarni tozalash:</strong> Yeyilishni tozalash (mayda fayl yoki kontakt moylovchisi); Ag-CdO kontaktlarni qo'pol ishlov bermang!</li>
+            <li><strong>Solenoidni tekshirish:</strong> Rezistans o'lchash; izolatsiya R<sub>iz</sub> megaommetr bilan.</li>
+            <li><strong>Yog'ochni tekshirish:</strong> Yuzasi tekis va toza bo'lishi; yovvoyilik bo'lmasligi.</li>
+            <li><strong>Kontakt bosimini o'lchash:</strong> Dinamometr bilan; norma 0,5–5 N (kontaktor o'lchamiga qarab).</li>
+            <li><strong>Sinov:</strong> Boshqaruv kuchlanishi berilib, kontaktlarning ochilish/yopilishini tekshirish.</li>
+          </ol>
+
+          <h3>Avtomatik uzgichni tekshirish</h3>
+          <ol class="steps">
+            <li><strong>Ko'rgazmali ko'rik:</strong> Korpus va kontaktlar holati.</li>
+            <li><strong>Term-relé egilish tekshiruvi:</strong> Bimetal plastinkalar bukilgan bo'lmasligi kerak.</li>
+            <li><strong>Trip sinoví:</strong> Sinov tokini berish → trip vaqtini o'lchash; norma ± 20% ruxsat etilgan deviatsiya.</li>
+            <li><strong>Qo'l bilan qayta qo'yish (reset):</strong> Bajarish va kontaktlar yopilishini tekshirish.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="section fault">
+        <div class="section-header">⚠️ Apparatlar nosozliklari jadvali</div>
+        <div class="section-body">
+          <table>
+            <tr><th>Apparat</th><th>Nosozlik</th><th>Sababi</th><th>Bartaraf etish</th></tr>
+            <tr><td>Kontaktor</td><td>Gurrillaydi</td><td>Yog'och yuzasi kir, kuchlanish past</td><td>Tozalash, kuchlanishni tekshirish</td></tr>
+            <tr><td>Kontaktor</td><td>Kontaktlar yopilmaydi</td><td>Solenoid nosoz, boshqaruv tok yo'q</td><td>Solenoidni almashtirish, zanjir tekshirish</td></tr>
+            <tr><td>АВ</td><td>Noto'g'ri trip vaqti</td><td>Bimetal yeyilgan, sozlash siljigan</td><td>Kalibratsiya yoki almashtirish</td></tr>
+            <tr><td>Sigorta</td><td>Tez yonadi</td><td>Ortiqcha tok yoki noto'g'ri qiymat</td><td>Sabab aniqlash, nominal qiymatni tekshirish</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="section safety">
+        <div class="section-header">🛑 Xavfsizlik texnikasi</div>
+        <div class="section-body">
+          <div class="safety-box">
+            <div class="safety-title">🚨 APPARATLAR TA'MIRI XAVFSIZLIGI</div>
+            <ul>
+              <li>Kontaktorni kuchlanish ostida tekshirish faqat <strong>maxsus sinov asboblari</strong> bilan amalga oshiriladi.</li>
+              <li>Sigorta almashtirish vaqtida <strong>kuchlanish albatta uziladi</strong> — qisqa tutashuv bo'lsa portlash xavfi bor.</li>
+              <li>Kontaktlardagi yoyadigan bug'lar <strong>zaharli** bo'lishi mumkin — ventilyatsiya ta'minlansin.</li>
+              <li>Avtomatik uzgich trip qilganda <strong>kulruq sinov zarbasiz** qayta o'rnatilsin — ta'sir izi bo'lsa, tekshirmasdan yopish taqiqlanadi.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+  <!-- ═══════════════════════════════════════════ MAVZU 33 ═══ -->
+  <details id="t33">
+    <summary>
+      <div class="topic-num">33</div>
+      <div class="topic-title">Kuchlanishi 1000 V gacha tarqatish qurilmalarini, yurgizish va himoya qilish apparatlarini ishlatish va ularga texnik xizmat ko'rsatish</div>
+      <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    </summary>
+    <div class="content">
+
+      <div class="section annot">
+        <div class="section-header">📌 Annotatsiya</div>
+        <div class="section-body">
+          <p>Tarqatish qurilmalarini kompleks texnik xizmat ko'rsatish — kiruvchi quvvatdan to oxirgi iste'molchigacha bo'lgan barcha apparatlarning doimiy tekshirilishi, sozlanishi va ta'mirlanishi demakdir. Bu jarayon elektr ta'minotning uzluksizligi va ishonchliligini ta'minlaydi.</p>
+        </div>
+      </div>
+
+      <div class="section theory">
+        <div class="section-header">📚 Texnik xizmat ko'rsatish tizimi</div>
+        <div class="section-body">
+          <h3>TO dasturi — tarkibi</h3>
+          <table>
+            <tr><th>Davriyligi</th><th>Ishlar hajmi</th><th>Mas'ul</th></tr>
+            <tr><td>Kunlik</td><td>Ko'rgazmali tekshiruv, issiqlash nuqtalari, asboblar ko'rsatmalari</td><td>Navbatchi elektrik</td></tr>
+            <tr><td>Oylik</td><td>Qo'rqinch dog'lari, izolyasiya yuzasi tozalash, mexanik holat</td><td>Elektrotexnik xodim</td></tr>
+            <tr><td>Choraklik</td><td>Kontaktlar ko'rish, klemma tortish, relé sinov</td><td>Muhandis boshchiligida</td></tr>
+            <tr><td>Yillik</td><td>Izolyatsiya o'lchash, yerga ulash, kontaktlar kalibratsiya, protokol</td><td>Mas'ul muhandis</td></tr>
+            <tr><td>Kapital (5–8 yil)</td><td>To'liq ko'rikchi ta'mirlash, almashtirish, sinov dasturi</td><td>Maxsus brigada + XTx</td></tr>
+          </table>
+
+          <h3>Termovisor texnologiyasi</h3>
+          <p>Termovisor (infrachiziqli kamera) bilan tekshiruv — kuchlanish ostida, ishlab turib o'tkaziladi. Bu usul "issiq nuqtalar"ni aniqlashda eng samarali metoddir.</p>
+          <div class="info-box">Termovisor tekshiruvida anomal issiqlash (≥ 10°C farq) aniqlansa — <em>darhol bartaraf etish rejasini** tuzish kerak.</em></div>
+
+          <h3>Elektr xavfsizlik kategoriyalari (PTE asosida)</h3>
+          <table>
+            <tr><th>Ish turi</th><th>Minimal guruh</th><th>Xodimlar soni</th></tr>
+            <tr><td>Ishlayotgan panelni ko'rikdan o'tkazish</td><td>III</td><td>1</td></tr>
+            <tr><td>De-energizatsiya qilingan zanjirda ishlash</td><td>III</td><td>2 (biri kuzatuvchi)</td></tr>
+            <tr><td>Kuchlanish ostida ishlash</td><td>IV–V</td><td>2–3</td></tr>
+            <tr><td>Kapital ta'mirlash</td><td>IV + V (mas'ul)</td><td>3–5</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="section pract">
+        <div class="section-header">🛠 Yillik TO dasturini bajarish algoritmi</div>
+        <div class="section-body">
+          <ol class="steps">
+            <li><strong>Ishga ruxsatnoma olish:</strong> Narada-dopuск rasmiylashtirish; mas'ul muhandisdan ruxsat.</li>
+            <li><strong>De-energizatsiya va xavfsizlik:</strong> Barcha sektsiyalarni o'chirish; yerga ulash va plakatlar.</li>
+            <li><strong>Mexanik ko'rik:</strong> Korpus, qopqoq, vintlar, sxema joylanishi, kabel kirish ochiq emasligi.</li>
+            <li><strong>Elektr ko'rik:</strong> Klemma tortilganligi, shina ulashlari, izolyatsiya holati (vizual).</li>
+            <li><strong>Izolyatsiya R<sub>iz</sub> o'lchash:</strong> Barcha yo'nalishlar, barcha fazalar, neytral va yer orasida.</li>
+            <li><strong>Kontaktlar tekshiruvi:</strong> Kontaktorlar, avtomatik uzgichlar, sigorta qutilari vizual va asboblar bilan.</li>
+            <li><strong>Yerga ulash tekshiruvi:</strong> Panel kuzovi, shina, kabel ekranlari → R ≤ 4 Ω.</li>
+            <li><strong>Relé va himoyalarning ishlash sinoví:</strong> Belgilangan amperlar berib trip vaqtini o'lchash.</li>
+            <li><strong>Yig'ish va qabul qilish:</strong> Protokolni to'ldirish, imzo qo'yish, arxivga topshirish.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="section fault">
+        <div class="section-header">⚠️ TQ va apparatlar kompleks nosozliklari</div>
+        <div class="section-body">
+          <table>
+            <tr><th>Nosozlik</th><th>Aniqlanish usuli</th><th>Bartaraf etish</th></tr>
+            <tr><td>Shina qo'shilishida qizib ketish</td><td>Termovisor</td><td>Tortish, tozalash, zarur bo'lsa almashtirish</td></tr>
+            <tr><td>Past izolyatsiya yo'nalishda</td><td>Megaommetr</td><td>Kabel tekshiruv, iste'molchini tekshirish</td></tr>
+            <tr><td>Zichlash (IP himoyasi) buzilishi</td><td>Ko'rgazmali tekshiruv</td><td>Qistirmalar, muftalar almashtirish</td></tr>
+            <tr><td>Shovqinli relé</td><td>Eshitish, issiqlash</td><td>Kontaktlar, sababi bartaraf etish</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="section safety">
+        <div class="section-header">🛑 Xavfsizlik texnikasi</div>
+        <div class="section-body">
+          <div class="safety-box">
+            <div class="safety-title">🚨 TQ TEXNIK XIZMAT XAVFSIZLIGI</div>
+            <ul>
+              <li>Barcha TO ishlari faqat <strong>ish ruxsatnomasi (narada-dopuск)</strong> rasmiylashtirilganidan keyin boshlanadi.</li>
+              <li>Panel ichida ishlashda <strong>dielektrik qo'lqop, ko'zoynak va yuz qalqoni</strong> majburiy.</li>
+              <li>Termovisorli ko'rikdan o'tkazishda panel qopqog'ini <strong>kuchlanish ostida ochish</strong> faqat ruxsatli xodim tomonidan amalga oshiriladi.</li>
+              <li>Kuchlanish berish va uzish haqida <strong>og'zaki va telefon orqali ma'lumot berish</strong> majburiy — kutilmagan qo'shish avariyalarga olib keladi.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+  <!-- ═══════════════════════════════════════════ MAVZU 34 ═══ -->
+  <details id="t34">
+    <summary>
+      <div class="topic-num">34</div>
+      <div class="topic-title">Himoya qilish va rostlash apparatlarini ishlatish va ta'mirlashni o'rganish</div>
+      <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    </summary>
+    <div class="content">
+
+      <div class="section annot">
+        <div class="section-header">📌 Annotatsiya</div>
+        <div class="section-body">
+          <p>Ushbu mavzu amaliy o'quv sessiyasi uchun mo'ljallangan bo'lib, himoya qilish va rostlash apparatlarini o'rganish metodikasini, laboratoriya va sanoat sharoitidagi texnik sinov usullarini hamda ta'mirlash ko'nikmasini shakllantirish dasturini o'z ichiga oladi.</p>
+          <p>Maqsad: talabalar/texniklar himoya apparatlarini mustaqil ishlatish, sinov o'tkazish va asosiy ta'mirlash ishlarini amalga oshira olishlarini ta'minlash.</p>
+        </div>
+      </div>
+
+      <div class="section theory">
+        <div class="section-header">📚 O'rganish metodikasi va nazariy asos</div>
+        <div class="section-body">
+          <h3>O'rganish bosqichlari</h3>
+          <table>
+            <tr><th>Bosqich</th><th>Mazmuni</th><th>Davomiyligi</th></tr>
+            <tr><td>Nazariy tayyorgarlik</td><td>Apparat ishlash printsipi, texnik hujjatlar, GOST talablari</td><td>2 soat</td></tr>
+            <tr><td>Laboratoriya mashg'uloti</td><td>Demostratsion stendda ko'rish va ishlatish</td><td>3 soat</td></tr>
+            <tr><td>Sinov amaliyoti</td><td>Haqiqiy apparat ustida o'lchov va sinov</td><td>4 soat</td></tr>
+            <tr><td>Ta'mirlash amaliyoti</td><td>Namunaviy nosozlikni aniqlash va bartaraf etish</td><td>3 soat</td></tr>
+            <tr><td>Attestatsiya</td><td>Bilim va ko'nikmani baholash</td><td>1 soat</td></tr>
+          </table>
+
+          <h3>O'rganilishi zarur bo'lgan asosiy apparatlar</h3>
+          <ul>
+            <li><strong>Differentsial himoya relési (RCD, RCBO)</strong> — tanlov, ulash, sinov</li>
+            <li><strong>Magnit termik relé (MT-relé)</strong> — sozlash va kalibratsiya</li>
+            <li><strong>Elektronli ortiqcha yuklanish relési</strong> — parametrlarni dasturlash</li>
+            <li><strong>Kuchlanish relési (OVR/UVR)</strong> — sozlash</li>
+            <li><strong>Zichlash (IP nazorat) qurilmasi</strong> — tekshiruv</li>
+            <li><strong>Tok transformatori (ТТ)</strong> — sinov va qo'llash</li>
+            <li><strong>Kuchlanish regulyatori (VFD)</strong> — parametrlarni sozlash</li>
+          </ul>
+
+          <h3>Texnik hujjatlar bilan ishlash ko'nikmalari</h3>
+          <ul>
+            <li>Apparat pasportini o'qish va asosiy ma'lumotlarni toping</li>
+            <li>Elektr sxemasini tahlil qilish (birlamchi va ikkilamchi)</li>
+            <li>Sinov protokolini to'ldirish</li>
+            <li>Defektatsiya aktini yozish</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="section pract">
+        <div class="section-header">🛠 Laboratoriya mashg'uloti dasturi</div>
+        <div class="section-body">
+          <h3>1-mashg'ulot: MT-releni sozlash va kalibratsiya</h3>
+          <ol class="steps">
+            <li>Releni sinov stendiga o'rnatish va ulash sxemasini yig'ish.</li>
+            <li>Pasport qiymatlariga asosan sozlash qiymatlarini hisoblash.</li>
+            <li>Sozlashni o'rnatish (aylantiriladigan vintlar yoki digital tugma bilan).</li>
+            <li>Sinov toki berilib, trip vaqtini stopwatch bilan o'lchash.</li>
+            <li>Vaqt-tok xarakteristikasini jadvalga yozish va grafik chizish.</li>
+          </ol>
+
+          <h3>2-mashg'ulot: RCD siylash (commissioning)</h3>
+          <ol class="steps">
+            <li>RCD ni sinov stendiga ulash (L, N, PE).</li>
+            <li>"TEST" tugmasini bosib ishlashini tekshirish (avval shunday qilinadi).</li>
+            <li>Aylanma tok generatori yordamida 0,5 × I<sub>Δn</sub> berilib — ishlamasligi tekshiriladi.</li>
+            <li>1,0 × I<sub>Δn</sub> berilib — trip qilishi va trip vaqti o'lchanadi.</li>
+            <li>5 × I<sub>Δn</sub> berilib — 40ms da trip qilishi tekshiriladi.</li>
+          </ol>
+
+          <h3>3-mashg'ulot: VFD sozlash</h3>
+          <ol class="steps">
+            <li>VFD asosiy parametrlarini dasturlash (nominal tok, chastota, tezlashtirish/sekinlashtirish vaqti).</li>
+            <li>Himoya parametrlarini sozlash (ortiqcha tok, qam kuchlanish, harorat).</li>
+            <li>Dvigatel bilan yuk ostida sinov o'tkazish.</li>
+            <li>Fault log ni o'qish va tahlil qilish.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="section fault">
+        <div class="section-header">⚠️ Mashg'ulot davomida uchraydigan tipik xatolar</div>
+        <div class="section-body">
+          <table>
+            <tr><th>Xato</th><th>Oqibati</th><th>To'g'ri yechim</th></tr>
+            <tr><td>Releni noto'g'ri sozlash (oshirib qo'yish)</td><td>Jihozni himoyalanmaydi</td><td>Hisob-kitob bilan sozlash</td></tr>
+            <tr><td>RCD ni neytral ulashda xato</td><td>Yolg'on trip yoki ishlamaslik</td><td>Ulash sxemasini qayta tekshirish</td></tr>
+            <tr><td>VFD chiqishiga kondensator ulash</td><td>VFD nosozligi</td><td>VFD chiqishiga kondensator ulash taqiqlanadi</td></tr>
+            <tr><td>MT-relé sozlashni o'lchamay qilish</td><td>Noto'g'ri himoya</td><td>Ammeter/kalibratsiya bilan tekshirish</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="section safety">
+        <div class="section-header">🛑 Xavfsizlik texnikasi</div>
+        <div class="section-body">
+          <div class="safety-box">
+            <div class="safety-title">🚨 O'QUV AMALIYOTI XAVFSIZLIGI</div>
+            <ul>
+              <li>Stend bilan ishlashda <strong>o'qituvchi yoki ustoz kuzatuvi</strong> majburiy — mustaqil urinishlar taqiqlanadi (1-bosqichda).</li>
+              <li>Stendni <strong>de-energizatsiya qilmasdan** ulash-uzish sxemalarini o'zgartirish taqiqlanadi.</li>
+              <li>Sinov vaqtida stend atrofi <strong>to'sib** qo'yilsin — boshqalar kirmasin.</li>
+              <li>Barcha amaliy ishlar tugaganidan keyin <strong>jurnalga imzo** qo'yiladi — javobgarlik belgilanadi.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+  <!-- ═══════════════════════════════════════════ MAVZU 35 ═══ -->
+  <details id="t35">
+    <summary>
+      <div class="topic-num">35</div>
+      <div class="topic-title">Himoya qilish va rostlash apparatlarini ishlatish</div>
+      <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    </summary>
+    <div class="content">
+
+      <div class="section annot">
+        <div class="section-header">📌 Annotatsiya</div>
+        <div class="section-body">
+          <p>Himoya qilish va rostlash apparatlarini to'g'ri ishlatish — elektr ta'minotining uzluksizligini ta'minlaydi, avariyalar va moliyaviy yo'qotishlarni kamaytiradi. Bu mavzuda apparatlarning kundalik ishlatilishi, nazorat, sozlash va texnik xizmat ko'rsatish amaliyoti ko'rib chiqiladi.</p>
+        </div>
+      </div>
+
+      <div class="section theory">
+        <div class="section-header">📚 Apparatlarni ishlatish tamoyillari</div>
+        <div class="section-body">
+          <h3>Himoya apparatlarining asosiy funksiyalari</h3>
+          <table>
+            <tr><th>Apparat</th><th>Himoya qilinadigan hodisa</th><th>Ishga tushirish sharti</th></tr>
+            <tr><td>Avtomatik uzgich (АВ)</td><td>Qisqa tutashuv (KZ), ortiqcha yuklanish</td><td>I &gt; I<sub>magn</sub> yoki I &gt; I<sub>term</sub></td></tr>
+            <tr><td>Differentsial relé (RCD)</td><td>Yerga oqim, elektr urishi</td><td>I<sub>diff</sub> &gt; I<sub>Δn</sub></td></tr>
+            <tr><td>Ortiqcha yuklanish relési (OLR)</td><td>Dvigatel qizishi, bir faza yo'qolishi</td><td>I &gt; I<sub>sozlash</sub> × t</td></tr>
+            <tr><td>Kuchlanish relési (OVR/UVR)</td><td>Ortiqcha/kam kuchlanish</td><td>U &gt; U<sub>max</sub> yoki U &lt; U<sub>min</sub></td></tr>
+            <tr><td>Chastota relési</td><td>Chastota tebranishi</td><td>f &gt; f<sub>max</sub> yoki f &lt; f<sub>min</sub></td></tr>
+            <tr><td>Termistor himoyasi</td><td>Dvigatel harorat ortishi</td><td>T &gt; T<sub>trip</sub></td></tr>
+          </table>
+
+          <h3>Rostlash apparatlari va ularning sozlash diapazoni</h3>
+          <table>
+            <tr><th>Rostlash apparati</th><th>Rostlanadigan parametr</th><th>Diapazon</th></tr>
+            <tr><td>VFD (Chastota o'zgartiruvchi)</td><td>Chastota, tezlashuv/sekinlashuv, tok chegarasi</td><td>0,5–400 Hz; 0,1–3600 s</td></tr>
+            <tr><td>AVR (Kuchlanish regulyatori)</td><td>Chiqish kuchlanishi</td><td>±5–15%</td></tr>
+            <tr><td>Soft-starter (Yumshoq yurgizuvchi)</td><td>Ishga tushirish toki va momenti</td><td>30–100% I<sub>n</sub>; 1–60 s</td></tr>
+            <tr><td>PID regulyator</td><td>Tok, bosim, tezlik, harorat</td><td>Dasturlashtiriluvchi</td></tr>
+          </table>
+
+          <h3>VFD — asosiy parametrlarini tushunish</h3>
+          <ul>
+            <li><strong>P01 — Nominal chastota:</strong> 50 Hz (O'zbekistonda)</li>
+            <li><strong>P02 — Tezlashuv vaqti (Accel):</strong> Mashinaning ishga tushirish davomiyligini belgilaydi</li>
+            <li><strong>P03 — Sekinlashuv vaqti (Decel):</strong> To'xtatish davomiyligini belgilaydi</li>
+            <li><strong>P04 — Ortiqcha tok himoyasi:</strong> Nominal tokning 100–150% ni belgilaydi</li>
+            <li><strong>P05 — Chiqib ketishga qarshi himoya (stall):</strong> Ortiqcha yuk bloklanishidan himoya</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="section pract">
+        <div class="section-header">🛠 Apparatlarni ishlatish amaliyoti</div>
+        <div class="section-body">
+          <h3>OLR (Ortiqcha yuklanish relési) ni sozlash algoritmi</h3>
+          <ol class="steps">
+            <li><strong>Dvigatel nominal tokini aniqlash:</strong> Pasportdan yoki <code>I_n = P_n / (√3 × U_n × η × cosφ)</code> formulasidan.</li>
+            <li><strong>OLR sozlash qiymatini hisoblash:</strong> I<sub>rel</sub> = I<sub>n</sub> × 1,0–1,25 (tok o'zgartiruvchi TA orqali bo'lsa TA koeffitsientini hisobga olish).</li>
+            <li><strong>OLR shkalasida sozlash:</strong> Vintni yoki digital tugmani aylantirish orqali belgilangan qiymatga keltirish.</li>
+            <li><strong>Trip vaqtini tekshirish:</strong> 1,5 × I<sub>n</sub> berilganda 2–10 daqiqada trip qilishi kerak (sinfga qarab).</li>
+            <li><strong>Qayta ishga tushirish rejimini tanlash:</strong> Qo'l bilan (manual) yoki avtomatik (auto-reset).</li>
+          </ol>
+
+          <h3>VFD ishga tushirish algoritmi</h3>
+          <ol class="steps">
+            <li>VFD kirishiga kuchlanish berish; LCD ekranda "Ready" yoki "Tayyor" holati.</li>
+            <li>Dvigatel parametrlari (P<sub>n</sub>, I<sub>n</sub>, U<sub>n</sub>, cosφ) dasturlash menyusiga kiritish.</li>
+            <li>Tezlashuv/sekinlashuv vaqtlarini sozlash.</li>
+            <li>Himoya parametrlarini sozlash (I<sub>max</sub>, T<sub>max</sub>, U<sub>min/max</sub>).</li>
+            <li>Boshqaruv manbasini tanlash: lokal tugma yoki masofaviy signal (4–20 mA, Modbus).</li>
+            <li>Chiqish chastotasini asta-sekin oshirish, dvigatel ishlashini kuzatish.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="section fault">
+        <div class="section-header">⚠️ Ishlatish nosozliklari</div>
+        <div class="section-body">
+          <table>
+            <tr><th>Apparat</th><th>Xato holat</th><th>Sababi</th><th>Bartaraf etish</th></tr>
+            <tr><td>OLR</td><td>Tez trip qiladi</td><td>Sozlash past, dvigatel qizimoqda</td><td>Sozlashni tekshirish, dvigatel ko'rish</td></tr>
+            <tr><td>OLR</td><td>Trip qilmaydi (ortiqcha yukda)</td><td>Sozlash juda yuqori, OLR nosoz</td><td>Kalibratsiya, almashtirish</td></tr>
+            <tr><td>VFD</td><td>"OC" (Over Current) xatosi</td><td>Tezlashuv vaqti qisqa, yuk og'ir</td><td>Accel vaqtini oshirish</td></tr>
+            <tr><td>VFD</td><td>"UV" (Under Voltage) xatosi</td><td>Tarmoq kuchlanishi past</td><td>Kuchlanishni tekshirish, UPS qo'shish</td></tr>
+            <tr><td>Soft-starter</td><td>Motor ishga tushmaydi</td><td>Bypass kontaktor nosoz</td><td>Bypass kontaktor tekshirish</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="section safety">
+        <div class="section-header">🛑 Xavfsizlik texnikasi</div>
+        <div class="section-body">
+          <div class="safety-box">
+            <div class="safety-title">🚨 HIMOYA APPARATLARINI ISHLATISH XAVFSIZLIGI</div>
+            <ul>
+              <li>VFD chiqish terminallariga kuchlanish ostida <strong>qo'l tekkizish taqiqlanadi** — kuchlanish mavjud bo'lganda ham, dvigatel to'xtagan bo'lsa ham (kondensatorlar zaryadlangan).</li>
+              <li>OLR trip qilganda sababni aniqlamay <strong>qayta reset qilmaslik kerak** — dvigatelda mexanik bloklash yoki elektr qisqa tutashuv bo'lishi mumkin.</li>
+              <li>VFD xona harorati <strong>+40°C dan oshmasligi** shart; to'g'ri ventilatsiya ta'minlansin.</li>
+              <li>VFD yoki soft-starter faqat <strong>zavod tavsiyasidagi dvigatel turlari** uchun ishlatilsin — universal qo'llash texnik shartlarda ko'rsatilishi kerak.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+  <!-- ═══════════════════════════════════════════ MAVZU 36 ═══ -->
+  <details id="t36">
+    <summary>
+      <div class="topic-num">36</div>
+      <div class="topic-title">Himoya qilish va rostlash apparatlarini ta'mirlash</div>
+      <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    </summary>
+    <div class="content">
+
+      <div class="section annot">
+        <div class="section-header">📌 Annotatsiya</div>
+        <div class="section-body">
+          <p>Himoya qilish va rostlash apparatlarini ta'mirlash — yuqori malaka va maxsus bilimni talab qiluvchi texnik jarayon. Apparatlarning to'g'ri ishlashi butun elektr tizimi xavfsizligiga bevosita ta'sir qiladi. Ushbu mavzuda asosiy ta'mirlash texnologiyalari, diagnostika usullari va qabul qilish sinovlari ko'rib chiqiladi.</p>
+        </div>
+      </div>
+
+      <div class="section theory">
+        <div class="section-header">📚 Nazariy asos — Ta'mirlash turlari va texnologiyalari</div>
+        <div class="section-body">
+          <h3>Ta'mirlash turi va hajmi</h3>
+          <table>
+            <tr><th>Ta'mirlash turi</th><th>Hajmi</th><th>Muddati</th></tr>
+            <tr><td>Joriy ta'mirlash</td><td>Kontaktlar tozalash, yog'lash, sozlash tekshiruvi</td><td>6–12 oy</td></tr>
+            <tr><td>O'rta ta'mirlash</td><td>Chulg'am tekshiruvi, kontaktlar almashtirish, kalibratsiya</td><td>2–3 yil</td></tr>
+            <tr><td>Kapital ta'mirlash</td><td>To'liq demontaj, izolyatsiya, mexanik qism, sinov</td><td>5–10 yil</td></tr>
+            <tr><td>Avariya ta'miri</td><td>Nosozlik sababini aniqlash va bartaraf etish</td><td>Zarur bo'lganda</td></tr>
+          </table>
+
+          <h3>Kontakt tizimining yeyilish nazariyasi</h3>
+          <p>Kontaktlarning yeyilishi uch mexanizm orqali sodir bo'ladi:</p>
+          <ol>
+            <li><strong>Elektr eroziya:</strong> Ochilish/yopilishdagi elektr yoyidan; Ag-CdO kontaktlari 500 000+ operatsiyaga mo'ljallangan</li>
+            <li><strong>Mexanik yeyilish:</strong> Kontaktlarning bir-biriga surkаlishidan; yuvish tozalash bilan kamaytiriladi</li>
+            <li><strong>Korrozion yeyilish:</strong> Oksidlanish; tozalash yoki maxsus qoplama bilan kamaytirish</li>
+          </ol>
+
+          <h3>Relé va apparat diagnostikasi usullari</h3>
+          <table>
+            <tr><th>Diagnostika usuli</th><th>Asbob</th><th>Aniqlash maqsadi</th></tr>
+            <tr><td>Kontakt qarshiligini o'lchash</td><td>Mikroommetr</td><td>Kontakt yuzasi holati</td></tr>
+            <tr><td>Izolyatsiya qarshiligini o'lchash</td><td>Megaommetr</td><td>Izolyatsiya holati</td></tr>
+            <tr><td>Trip vaqtini o'lchash</td><td>Relé sinov bloki (FREJA, OMICRON)</td><td>Kalibratsiya va koordinatsiya</td></tr>
+            <tr><td>Termovizor tekshiruvi</td><td>Termovisor (FLIR, Testo)</td><td>Anomal issiqlash nuqtalari</td></tr>
+            <tr><td>Titrash tahlili</td><td>Akselerometr</td><td>Mexanik qismlar holati</td></tr>
+            <tr><td>Vizual diagnostika</td><td>Ko'z, lupa, endoskop</td><td>Ko'rinadigan shikastlanishlar</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="section pract">
+        <div class="section-header">🛠 Ta'mirlash jarayonlari — batafsil algoritm</div>
+        <div class="section-body">
+          <h3>Magnit yurgizgichni kapital ta'mirlash</h3>
+          <ol class="steps">
+            <li><strong>De-energizatsiya va demontaj:</strong> Bosh va yordamchi kontaktlarni chiqarish; solenoid va yog'ochni ajratish.</li>
+            <li><strong>Kontaktlar tekshiruvi:</strong> Yeyilish o'lchash (microommetr); yeyilish ≥ 50% — almashtirish; kontakt sirtining tekisligi.</li>
+            <li><strong>Kontaktlarni tozalash (yeyilish &lt; 50% bo'lsa):</strong> Nozik fayl (400 grit) bilan silliqlash; Ag-CdO kontaktlarini shilishma bilan tozalash; tozalash agenti bilan yuvilish.</li>
+            <li><strong>Solenoid tekshiruvi:</strong> Rezistans o'lchash (nominaldan ±10% chegarasida); izolyatsiya R<sub>iz</sub> ≥ 2 MΩ.</li>
+            <li><strong>Yog'och yuzasini tekshirish:</strong> Tekis va tozalik; oksidlanish dog'larini silliqlash.</li>
+            <li><strong>Yordamchi kontaktlar tekshiruvi:</strong> Ochilish/yopilish tartibini tekshirish; R<sub>kontakt</sub> ≤ 200 mkΩ.</li>
+            <li><strong>Yoy o'chirish kamerasini tekshirish:</strong> Deionizatsiya plastinkalarining holati; kamera toza bo'lishi.</li>
+            <li><strong>Yig'ish:</strong> Teskari tartibda yig'ish; vintlarni tortig yo'qotmaslik.</li>
+            <li><strong>Sinov:</strong> Nominal boshqaruv kuchlanishi berilib, ulash/uzish vaqtini o'lchash; trip qilish funksiyasini tekshirish.</li>
+            <li><strong>Protokolni rasmiylashtirish:</strong> Bajarilib ishlari va sinov natijalari yoziladi.</li>
+          </ol>
+
+          <h3>Elektron relé (mikroprotsessorli) ta'miri</h3>
+          <ol class="steps">
+            <li><strong>Diagnostik ma'lumotlarni o'qish:</strong> Relé orqali event log, fault log, o'lchov qiymatlari.</li>
+            <li><strong>Dastur (firmware) versiyasini tekshirish:</strong> Zamonaviy versiyaga yangilash.</li>
+            <li><strong>Analogli kirish/chiqish kalibrasiyasi:</strong> Mos asbob bilan signal berib, relé ko'rsatishini tekshirish.</li>
+            <li><strong>Mexanik qismlar:</strong> Relé chiqish kontaktlari R<sub>k</sub> tekshiruvi.</li>
+            <li><strong>Kompleks sinov:</strong> Sinov bloki (FREJA 300 yoki OMICRON CMC) orqali trip vaqtini va parametrlarini tekshirish.</li>
+          </ol>
+
+          <h3>VFD ta'miri</h3>
+          <ol class="steps">
+            <li><strong>Xato kodini o'qish:</strong> VFD menyusida Fault History ko'rish.</li>
+            <li><strong>Kondensatorlarni tekshirish:</strong> DC bus kondensatorlarini ESR o'lchagich bilan tekshirish; 10+ yil bo'lsa almashtirish.</li>
+            <li><strong>IGBT modullarini tekshirish:</strong> Diod sinoví bilan; nosoz bo'lsa almashtirish.</li>
+            <li><strong>Sovutish ventilyatorini tekshirish:</strong> Aylanishini, shovqinini tekshirish; almashtirish muddati 3–5 yil.</li>
+            <li><strong>Dastur parametrlarini zaxiralash/tiklash:</strong> USB yoki kommunikatsiya orqali.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="section fault">
+        <div class="section-header">⚠️ Ta'mirlashda uchraydigan tipik muammolar</div>
+        <div class="section-body">
+          <table>
+            <tr><th>Muammo</th><th>Sababi</th><th>To'g'ri yechim</th></tr>
+            <tr><td>Ta'mirdan keyin relé noto'g'ri trip qiladi</td><td>Kalibratsiya o'tkazilmagan</td><td>Sinov bloki bilan qayta kalibratsiya</td></tr>
+            <tr><td>Kontaktlar tez yeyiladi</td><td>Yoy o'chirish kamerasi buzilgan</td><td>Kamerani almashtirish</td></tr>
+            <tr><td>VFD ta'mirdan keyin "HW Error" beradi</td><td>IGBT yoki drayver noto'g'ri o'rnatilgan</td><td>Montaj sxemasini qayta tekshirish</td></tr>
+            <tr><td>Solenoid ishi gurrillash bilan</td><td>Yog'och va o'tirish yuzasida kir</td><td>Tozalash, laksimon qatlam olib tashlash</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="section safety">
+        <div class="section-header">🛑 Xavfsizlik texnikasi</div>
+        <div class="section-body">
+          <div class="safety-box">
+            <div class="safety-title">🚨 TA'MIRLASH XAVFSIZLIGI — KRITIK TALABLAR</div>
+            <ul>
+              <li>Himoya apparatini ta'mirlash faqat <strong>ish ruxsatnomasi (narada-dopusk)</strong> rasmiylashtirilganidan keyin boshlanadi — bu shart bo'lmasdan hech qanday ish qilinmaydi.</li>
+              <li>VFD ta'mirida kuchlanish uzilganidan keyin <strong>kamida 5 daqiqa kutish</strong> lozim — kondensatorlar qolgan zaryad (300–600V DC) hayot uchun xavfli.</li>
+              <li>Mikroprotsessorli relé ta'mirida ESD (statik elektr) himoyasi uchun <strong>bilek halqasi va antistatik stol</strong> ishlatiladi — statik 10–20 kV bilan mikrosxemalarni nobud qilishi mumkin.</li>
+              <li>Himoya apparatini ta'mirdan keyin <strong>majburiy ravishda sinov</strong> o'tkaziladi va protokol rasmiylashtiriladi — sinov o'tkazilmasdan ishga qo'yish qat'iyan taqiqlanadi.</li>
+              <li>Ta'mirlangan apparat parametrlari <strong>asl sostre sozlamalaridan farq qilsa</strong> — mas'ul muhandis bilan muvofiqlashtirmasdan o'rnatib bo'lmaydi.</li>
+              <li>Kontaktlarni tozalashda ishlatiladigan kimyoviy moddalar (izopropil spirt, kontakt sprey) <strong>yonuvchi** — ochiq olov va elektr uchqunidan uzoqda foydalanish shart.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+</main>
+
+<footer>
+  ⚡ Elektr Energetikasi O'quv Materiali · PTE / PTB asosida tuzilgan · Barcha huquqlar himoyalangan · 2025
+</footer>
+
+</body>
+</html>
